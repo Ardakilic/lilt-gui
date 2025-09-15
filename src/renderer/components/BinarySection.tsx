@@ -71,10 +71,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
         { name: 'All Files', extensions: ['*'] }
       ];
       
-      const result = await window.electronAPI.selectFile({
-        title: `Select ${binaryType.replace('BinaryPath', '').replace(/([A-Z])/g, ' $1').trim()} Binary`,
-        filters
-      });
+      const result = await window.electronAPI.selectFile(filters);
       if (result) {
         onUpdateSetting(binaryType, result);
         onUpdateLastUsedPath(binaryType.replace('BinaryPath', 'Binary'), result);

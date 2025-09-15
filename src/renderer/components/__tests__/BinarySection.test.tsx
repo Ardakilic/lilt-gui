@@ -32,13 +32,15 @@ const defaultProps = {
     soxBinaryPath: '',
     ffmpegBinaryPath: '',
     ffprobeBinaryPath: '',
-    sourceFolder: '',
-    targetFolder: '',
+    sourceDir: '',
+    targetDir: '',
     useDocker: true,
-    outputFormat: 'flac',
+    dockerImage: 'ardakilic/lilt:latest',
+    enforceOutputFormat: '' as const,
     noPreserveMetadata: false,
     copyImages: true,
     language: 'en',
+    lastUsedPaths: {},
   },
   onUpdateSetting: jest.fn(),
   onUpdateLastUsedPath: jest.fn(),
@@ -99,13 +101,10 @@ describe('BinarySection Component', () => {
     fireEvent.click(browseButtons[0]); // First browse button (Lilt)
     
     await waitFor(() => {
-      expect(mockElectronAPI.selectFile).toHaveBeenCalledWith({
-        title: 'Select lilt Binary',
-        filters: [
-          { name: 'Executable Files', extensions: ['exe', ''] },
-          { name: 'All Files', extensions: ['*'] }
-        ]
-      });
+      expect(mockElectronAPI.selectFile).toHaveBeenCalledWith([
+        { name: 'Executable Files', extensions: ['exe', ''] },
+        { name: 'All Files', extensions: ['*'] }
+      ]);
       expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith('liltBinaryPath', '/path/to/lilt');
     });
   });
