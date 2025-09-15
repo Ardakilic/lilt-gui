@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo, DownloadProgress } from '@shared/types';
+import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo } from '@shared/types';
 
 const electronAPI = {
   // Settings

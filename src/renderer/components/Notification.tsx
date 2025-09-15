@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 type NotificationType = 'success' | 'error' | 'info' | 'warning';
@@ -25,7 +25,7 @@ const slideOut = keyframes`
   }
 `;
 
-const NotificationContainer = styled.div<{ type: NotificationType; isClosing?: boolean }>`
+const NotificationContainer = styled.div<{ $type: NotificationType; $isClosing?: boolean }>`
   position: fixed;
   top: 20px;
   right: 20px;
@@ -35,28 +35,28 @@ const NotificationContainer = styled.div<{ type: NotificationType; isClosing?: b
   z-index: ${props => props.theme.zIndex.notification};
   max-width: 400px;
   min-width: 300px;
-  animation: ${props => props.isClosing ? slideOut : slideIn} 0.3s ease-in-out;
+  animation: ${props => props.$isClosing ? slideOut : slideIn} 0.3s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   
-  ${props => props.type === 'success' && css`
+  ${props => props.$type === 'success' && css`
     background: ${props.theme.colors.success};
     color: white;
   `}
   
-  ${props => props.type === 'error' && css`
+  ${props => props.$type === 'error' && css`
     background: ${props.theme.colors.error};
     color: white;
   `}
   
-  ${props => props.type === 'info' && css`
+  ${props => props.$type === 'info' && css`
     background: ${props.theme.colors.info};
     color: white;
   `}
   
-  ${props => props.type === 'warning' && css`
+  ${props => props.$type === 'warning' && css`
     background: ${props.theme.colors.warning};
     color: white;
   `}
@@ -85,35 +85,18 @@ const CloseButton = styled.button`
 
 const Icon = styled.span<{ type: NotificationType }>`
   font-size: 18px;
-  
-  ${props => props.type === 'success' && css`
-    content: '✓';
-  `}
-  
-  ${props => props.type === 'error' && css`
-    content: '✕';
-  `}
-  
-  ${props => props.type === 'info' && css`
-    content: 'ℹ';
-  `}
-  
-  ${props => props.type === 'warning' && css`
-    content: '⚠';
-  `}
-  
-  &::before {
-    content: ${props => {
-      switch (props.type) {
-        case 'success': return '"✓"';
-        case 'error': return '"✕"';
-        case 'info': return '"ℹ"';
-        case 'warning': return '"⚠"';
-        default: return '""';
-      }
-    }};
-  }
+  user-select: none;
 `;
+
+const getIconText = (type: NotificationType): string => {
+  switch (type) {
+    case 'success': return '✓';
+    case 'error': return '✕';
+    case 'info': return 'ℹ';
+    case 'warning': return '⚠';
+    default: return 'ℹ';
+  }
+};
 
 interface NotificationProps {
   message: string;
@@ -132,6 +115,13 @@ export const Notification: React.FC<NotificationProps> = ({
 }) => {
   const [isClosing, setIsClosing] = React.useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 300); // Match animation duration
+  }, [onClose]);
+
   useEffect(() => {
     if (autoClose) {
       const timer = setTimeout(() => {
@@ -140,18 +130,11 @@ export const Notification: React.FC<NotificationProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, [autoClose, duration]);
-
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-    }, 300); // Match animation duration
-  };
+  }, [autoClose, duration, handleClose]);
 
   return (
-    <NotificationContainer type={type} isClosing={isClosing}>
-      <Icon type={type} />
+    <NotificationContainer $type={type} $isClosing={isClosing}>
+      <Icon type={type}>{getIconText(type)}</Icon>
       <Message>{message}</Message>
       <CloseButton onClick={handleClose}>
         ✕

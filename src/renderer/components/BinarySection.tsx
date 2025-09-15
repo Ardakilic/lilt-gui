@@ -43,12 +43,6 @@ const IdentifyButton = styled(Button)`
   min-width: 80px;
 `;
 
-const BinaryStatus = styled.span<{ isValid?: boolean }>`
-  font-size: ${props => props.theme.fontSize.sm};
-  color: ${props => props.isValid ? props.theme.colors.success : props.theme.colors.error};
-  margin-left: 8px;
-`;
-
 const DisabledGroup = styled.div<{ disabled: boolean }>`
   opacity: ${props => props.disabled ? 0.5 : 1};
   pointer-events: ${props => props.disabled ? 'none' : 'auto'};
@@ -73,11 +67,14 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
   const handleBrowse = async (binaryType: keyof AppSettings) => {
     try {
       const filters = [
-        { name: 'Executable Files', extensions: process.platform === 'win32' ? ['exe'] : ['*'] },
+        { name: 'Executable Files', extensions: process.platform === 'win32' ? ['exe'] : ['exe', ''] },
         { name: 'All Files', extensions: ['*'] }
       ];
       
-      const result = await window.electronAPI.selectFile(filters);
+      const result = await window.electronAPI.selectFile({
+        title: `Select ${binaryType.replace('BinaryPath', '').replace(/([A-Z])/g, ' $1').trim()} Binary`,
+        filters
+      });
       if (result) {
         onUpdateSetting(binaryType, result);
         onUpdateLastUsedPath(binaryType.replace('BinaryPath', 'Binary'), result);

@@ -47,9 +47,9 @@ Object.defineProperty(window, 'electronAPI', {
 // Mock i18next
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
-    t: (key: string, options?: any) => {
+    t: (key: string, options?: Record<string, unknown>) => {
       if (options) {
-        return key.replace(/\{\{(\w+)\}\}/g, (match, p1) => options[p1] || match);
+        return key.replace(/\{\{(\w+)\}\}/g, (match, p1) => String(options[p1] || match));
       }
       return key;
     },

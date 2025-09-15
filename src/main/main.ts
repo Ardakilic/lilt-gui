@@ -4,14 +4,10 @@ import Store from 'electron-store';
 import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo, DownloadProgress } from '@shared/types';
 import { exec, spawn, ChildProcess } from 'child_process';
 import { promisify } from 'util';
-import { readdir, access, constants, createWriteStream, chmod, unlink } from 'fs';
+import { access, constants, createWriteStream, chmod, unlink } from 'fs';
 import { get } from 'https';
-import { createGunzip } from 'zlib';
-import { Extract as TarExtract } from 'tar';
-import { createReadStream } from 'fs';
 
 const execAsync = promisify(exec);
-const readdirAsync = promisify(readdir);
 const accessAsync = promisify(access);
 
 class LiltGUI {

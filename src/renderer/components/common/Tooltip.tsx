@@ -5,7 +5,7 @@ type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 interface TooltipContentProps {
   position: TooltipPosition;
-  visible: boolean;
+  $visible: boolean;
 }
 
 const TooltipContainer = styled.div`
@@ -22,7 +22,7 @@ const TooltipContent = styled.div<TooltipContentProps>`
   font-size: ${props => props.theme.fontSize.sm};
   white-space: nowrap;
   z-index: ${props => props.theme.zIndex.tooltip};
-  opacity: ${props => props.visible ? 1 : 0};
+  opacity: ${props => props.$visible ? 1 : 0};
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
   box-shadow: ${props => props.theme.shadows.lg};
@@ -144,7 +144,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       <TooltipContent
         ref={contentRef}
         position={actualPosition}
-        visible={visible}
+        $visible={visible}
       >
         {content}
       </TooltipContent>

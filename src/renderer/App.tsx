@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { AppSettings, LiltConfig } from '@shared/types';
@@ -79,25 +79,12 @@ export const App: React.FC = () => {
   const [isProcessRunning, setIsProcessRunning] = useState(false);
   const [output, setOutput] = useState<string[]>([]);
 
-  useEffect(() => {
-    loadSettings();
-    setupEventListeners();
-
-    return () => {
-      // Cleanup listeners
-      window.electronAPI.removeAllListeners('lilt-output');
-      window.electronAPI.removeAllListeners('lilt-finished');
-      window.electronAPI.removeAllListeners('lilt-error');
-    };
+  const showNotification = useCallback((message: string, type: 'success' | 'error' | 'info') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 5000);
   }, []);
 
-  useEffect(() => {
-    if (settings) {
-      i18n.changeLanguage(settings.language);
-    }
-  }, [settings?.language, i18n]);
-
-  const loadSettings = async () => {
+  const loadSettings = useCallback(async () => {
     try {
       const loadedSettings = await window.electronAPI.getSettings();
       setSettings(loadedSettings);
@@ -107,9 +94,9 @@ export const App: React.FC = () => {
       showNotification(t('messages.settingsLoadFailed'), 'error');
       setLoading(false);
     }
-  };
+  }, [t, showNotification]);
 
-  const setupEventListeners = () => {
+  const setupEventListeners = useCallback(() => {
     window.electronAPI.onLiltOutput((output: string) => {
       setOutput(prev => [...prev, output]);
     });
@@ -123,7 +110,25 @@ export const App: React.FC = () => {
       setIsProcessRunning(false);
       showNotification(t('messages.processError', { error: error.error }), 'error');
     });
-  };
+  }, [t, showNotification]);
+
+  useEffect(() => {
+    loadSettings();
+    setupEventListeners();
+
+    return () => {
+      // Cleanup listeners
+      window.electronAPI.removeAllListeners('lilt-output');
+      window.electronAPI.removeAllListeners('lilt-finished');
+      window.electronAPI.removeAllListeners('lilt-error');
+    };
+  }, [loadSettings, setupEventListeners]);
+
+  useEffect(() => {
+    if (settings) {
+      i18n.changeLanguage(settings.language);
+    }
+  }, [settings, i18n]);
 
   const saveSettings = async (newSettings: Partial<AppSettings>) => {
     try {
@@ -152,11 +157,6 @@ export const App: React.FC = () => {
       };
       updateSetting('lastUsedPaths', newLastUsedPaths);
     }
-  };
-
-  const showNotification = (message: string, type: 'success' | 'error' | 'info') => {
-    setNotification({ message, type });
-    setTimeout(() => setNotification(null), 5000);
   };
 
   const validateConfig = (): string | null => {

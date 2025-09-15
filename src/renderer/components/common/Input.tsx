@@ -2,8 +2,7 @@ import React, { InputHTMLAttributes, forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 interface StyledInputProps {
-  hasError?: boolean;
-  disabled?: boolean;
+  $hasError?: boolean;
 }
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -27,7 +26,7 @@ const StyledInput = styled.input<StyledInputProps>`
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
   }
   
-  ${props => props.hasError && css`
+  ${props => props.$hasError && css`
     border-color: ${props.theme.colors.error};
     
     &:focus {
@@ -36,11 +35,11 @@ const StyledInput = styled.input<StyledInputProps>`
     }
   `}
   
-  ${props => props.disabled && css`
-    background: ${props.theme.colors.gray100};
-    color: ${props.theme.colors.textLight};
+  &:disabled {
+    background: ${props => props.theme.colors.gray100};
+    color: ${props => props.theme.colors.textLight};
     cursor: not-allowed;
-  `}
+  }
 `;
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -54,8 +53,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
   return (
     <StyledInput
       ref={ref}
-      hasError={hasError}
+      $hasError={hasError}
       {...props}
     />
   );
 });
+
+Input.displayName = 'Input';

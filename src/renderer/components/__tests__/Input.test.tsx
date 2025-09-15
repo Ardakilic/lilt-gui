@@ -50,7 +50,9 @@ describe('Input Component', () => {
         <Input type="password" />
       </ThemeProvider>
     );
-    expect(screen.getByRole('textbox')).toHaveAttribute('type', 'password');
+    // Password inputs don't have textbox role, so we query by input element directly
+    const passwordInput = document.querySelector('input[type="password"]');
+    expect(passwordInput).toHaveAttribute('type', 'password');
   });
 
   it('can have default value', () => {

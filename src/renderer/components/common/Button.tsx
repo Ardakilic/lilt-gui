@@ -5,9 +5,9 @@ type ButtonVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' |
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface StyledButtonProps {
-  variant: ButtonVariant;
-  size: ButtonSize;
-  fullWidth?: boolean;
+  $variant: ButtonVariant;
+  $size: ButtonSize;
+  $fullWidth?: boolean;
 }
 
 const buttonVariants = {
@@ -99,10 +99,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   white-space: nowrap;
   
-  ${props => buttonVariants[props.variant]}
-  ${props => buttonSizes[props.size]}
+  ${props => buttonVariants[props.$variant]}
+  ${props => buttonSizes[props.$size]}
   
-  ${props => props.fullWidth && css`
+  ${props => props.$fullWidth && css`
     width: 100%;
   `}
   
@@ -139,9 +139,9 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <StyledButton
-      variant={variant}
-      size={size}
-      fullWidth={fullWidth}
+      $variant={variant}
+      $size={size}
+      $fullWidth={fullWidth}
       disabled={disabled || loading}
       {...props}
     >

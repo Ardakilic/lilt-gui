@@ -48,21 +48,21 @@ const StopButton = styled(Button)`
   }
 `;
 
-const ProcessIndicator = styled.div<{ isRunning: boolean }>`
+const ProcessIndicator = styled.div<{ $isRunning: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: ${props => props.theme.fontSize.sm};
-  color: ${props => props.isRunning ? props.theme.colors.success : props.theme.colors.textSecondary};
+  color: ${props => props.$isRunning ? props.theme.colors.success : props.theme.colors.textSecondary};
   font-weight: ${props => props.theme.fontWeight.medium};
 `;
 
-const StatusDot = styled.span<{ isRunning: boolean }>`
+const StatusDot = styled.span<{ $isRunning: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: ${props => props.isRunning ? props.theme.colors.success : props.theme.colors.textLight};
-  animation: ${props => props.isRunning ? 'pulse 2s infinite' : 'none'};
+  background: ${props => props.$isRunning ? props.theme.colors.success : props.theme.colors.textLight};
+  animation: ${props => props.$isRunning ? 'pulse 2s infinite' : 'none'};
   
   @keyframes pulse {
     0% {
@@ -111,8 +111,8 @@ export const ActionsSection: React.FC<ActionsSectionProps> = ({
           ⏹ {t('buttons.stop')}
         </StopButton>
         
-        <ProcessIndicator isRunning={isProcessRunning}>
-          <StatusDot isRunning={isProcessRunning} />
+        <ProcessIndicator $isRunning={isProcessRunning}>
+          <StatusDot $isRunning={isProcessRunning} />
           {isProcessRunning ? 'Running' : 'Ready'}
         </ProcessIndicator>
       </ButtonGroup>

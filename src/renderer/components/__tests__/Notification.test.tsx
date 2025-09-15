@@ -37,7 +37,9 @@ describe('Notification Component', () => {
         <Notification {...defaultProps} type="error" />
       </ThemeProvider>
     );
-    expect(screen.getByText('✕')).toBeInTheDocument();
+    // Use getAllByText since both icon and close button have ✕ symbol
+    const errorSymbols = screen.getAllByText('✕');
+    expect(errorSymbols).toHaveLength(2); // Icon and close button
 
     rerender(
       <ThemeProvider theme={theme}>
@@ -54,14 +56,17 @@ describe('Notification Component', () => {
     expect(screen.getByText('ℹ')).toBeInTheDocument();
   });
 
-  it('calls onClose when close button is clicked', () => {
+  it('calls onClose when close button is clicked', async () => {
     const onClose = jest.fn();
     renderWithTheme(<Notification {...defaultProps} onClose={onClose} />);
     
     const closeButton = screen.getByRole('button');
     fireEvent.click(closeButton);
     
-    expect(onClose).toHaveBeenCalledTimes(1);
+    // The close handler uses setTimeout, so we need to wait for it
+    await waitFor(() => {
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('auto-closes after specified duration', async () => {
