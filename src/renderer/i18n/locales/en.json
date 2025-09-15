@@ -1,0 +1,74 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Version {{version}}"
+  },
+  "buttons": {
+    "browse": "Browse",
+    "identify": "Identify",
+    "start": "Start Transcoding",
+    "stop": "Stop Transcoding",
+    "download": "Download Lilt",
+    "changeLanguage": "Change Language"
+  },
+  "labels": {
+    "liltBinary": "Lilt Binary",
+    "soxBinary": "SoX Binary",
+    "ffmpegBinary": "FFmpeg Binary",
+    "ffprobeBinary": "FFprobe Binary",
+    "sourceFolder": "Source Folder",
+    "targetFolder": "Target Folder",
+    "useDocker": "Use Docker",
+    "dockerImage": "Docker Image",
+    "enforceOutputFormat": "Enforce Output Format",
+    "noPreserveMetadata": "No Preserve Metadata",
+    "copyImages": "Copy Images",
+    "output": "Output"
+  },
+  "placeholders": {
+    "selectBinary": "Select binary file...",
+    "selectFolder": "Select folder...",
+    "dockerImage": "Docker image name"
+  },
+  "tooltips": {
+    "liltBinary": "Path to the Lilt binary executable. Use 'Identify' to automatically find it in PATH.",
+    "soxBinary": "Path to SoX binary (required when not using Docker).",
+    "ffmpegBinary": "Path to FFmpeg binary (required for ALAC support when not using Docker).",
+    "ffprobeBinary": "Path to FFprobe binary (required for metadata when not using Docker).",
+    "sourceFolder": "Folder containing audio files to convert.",
+    "targetFolder": "Destination folder for converted files.",
+    "useDocker": "Use Docker container for processing (recommended). When enabled, local binaries are not required.",
+    "dockerImage": "Docker image to use for processing. Default: ardakilic/sox_ng:latest",
+    "enforceOutputFormat": "Convert all audio files to the specified format.",
+    "noPreserveMetadata": "Skip copying metadata and cover art from original files.",
+    "copyImages": "Copy JPG and PNG files from source to target directory.",
+    "downloadLilt": "Download the latest Lilt binary from GitHub releases."
+  },
+  "options": {
+    "flac": "FLAC",
+    "mp3": "MP3",
+    "alac": "ALAC"
+  },
+  "messages": {
+    "selectSourceFolder": "Please select a source folder",
+    "selectTargetFolder": "Please select a target folder",
+    "selectLiltBinary": "Please select or identify the Lilt binary",
+    "binaryNotFound": "Binary not found in PATH",
+    "binaryFound": "Binary found: {{path}}",
+    "processStarted": "Transcoding started",
+    "processStopped": "Transcoding stopped",
+    "processFinished": "Transcoding finished with code {{code}}",
+    "processError": "Process error: {{error}}",
+    "downloadStarted": "Download started",
+    "downloadCompleted": "Download completed: {{path}}",
+    "downloadFailed": "Download failed: {{error}}",
+    "unsupportedPlatform": "Unsupported platform or architecture",
+    "settingsSaved": "Settings saved"
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Sürüm {{version}}"
+  },
+  "buttons": {
+    "browse": "Gözat",
+    "identify": "Tanımla",
+    "start": "Dönüştürmeyi Başlat",
+    "stop": "Dönüştürmeyi Durdur",
+    "download": "Lilt İndir",
+    "changeLanguage": "Dil Değiştir"
+  },
+  "labels": {
+    "liltBinary": "Lilt Binary",
+    "soxBinary": "SoX Binary",
+    "ffmpegBinary": "FFmpeg Binary",
+    "ffprobeBinary": "FFprobe Binary",
+    "sourceFolder": "Kaynak Klasör",
+    "targetFolder": "Hedef Klasör",
+    "useDocker": "Docker Kullan",
+    "dockerImage": "Docker İmajı",
+    "enforceOutputFormat": "Çıkış Formatını Zorla",
+    "noPreserveMetadata": "Metadata Koruma",
+    "copyImages": "Resimleri Kopyala",
+    "output": "Çıktı"
+  },
+  "placeholders": {
+    "selectBinary": "Binary dosyasını seçin...",
+    "selectFolder": "Klasör seçin...",
+    "dockerImage": "Docker imaj adı"
+  },
+  "tooltips": {
+    "liltBinary": "Lilt binary dosyasının yolu. PATH'te otomatik bulmak için 'Tanımla' kullanın.",
+    "soxBinary": "SoX binary yolu (Docker kullanılmadığında gerekli).",
+    "ffmpegBinary": "FFmpeg binary yolu (Docker kullanılmadığında ALAC desteği için gerekli).",
+    "ffprobeBinary": "FFprobe binary yolu (Docker kullanılmadığında metadata için gerekli).",
+    "sourceFolder": "Dönüştürülecek ses dosyalarının bulunduğu klasör.",
+    "targetFolder": "Dönüştürülen dosyaların kaydedileceği klasör.",
+    "useDocker": "İşlem için Docker konteynırı kullan (önerilen). Etkin olduğunda yerel binary'ler gerekli değildir.",
+    "dockerImage": "İşlem için kullanılacak Docker imajı. Varsayılan: ardakilic/sox_ng:latest",
+    "enforceOutputFormat": "Tüm ses dosyalarını belirtilen formata dönüştür.",
+    "noPreserveMetadata": "Orijinal dosyalardan metadata ve kapak resmini kopyalamayı atla.",
+    "copyImages": "JPG ve PNG dosyalarını kaynak klasörden hedef klasöre kopyala.",
+    "downloadLilt": "GitHub releases'den en son Lilt binary'sini indir."
+  },
+  "options": {
+    "flac": "FLAC",
+    "mp3": "MP3",
+    "alac": "ALAC"
+  },
+  "messages": {
+    "selectSourceFolder": "Lütfen kaynak klasörü seçin",
+    "selectTargetFolder": "Lütfen hedef klasörü seçin",
+    "selectLiltBinary": "Lütfen Lilt binary'sini seçin veya tanımlayın",
+    "binaryNotFound": "Binary PATH'te bulunamadı",
+    "binaryFound": "Binary bulundu: {{path}}",
+    "processStarted": "Dönüştürme başlatıldı",
+    "processStopped": "Dönüştürme durduruldu",
+    "processFinished": "Dönüştürme {{code}} koduyla tamamlandı",
+    "processError": "İşlem hatası: {{error}}",
+    "downloadStarted": "İndirme başlatıldı",
+    "downloadCompleted": "İndirme tamamlandı: {{path}}",
+    "downloadFailed": "İndirme başarısız: {{error}}",
+    "unsupportedPlatform": "Desteklenmeyen platform veya mimari",
+    "settingsSaved": "Ayarlar kaydedildi"
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}

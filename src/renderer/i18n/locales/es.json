@@ -1,0 +1,74 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Versión {{version}}"
+  },
+  "buttons": {
+    "browse": "Examinar",
+    "identify": "Identificar",
+    "start": "Iniciar Transcodificación",
+    "stop": "Detener Transcodificación",
+    "download": "Descargar Lilt",
+    "changeLanguage": "Cambiar Idioma"
+  },
+  "labels": {
+    "liltBinary": "Binario Lilt",
+    "soxBinary": "Binario SoX",
+    "ffmpegBinary": "Binario FFmpeg",
+    "ffprobeBinary": "Binario FFprobe",
+    "sourceFolder": "Carpeta Origen",
+    "targetFolder": "Carpeta Destino",
+    "useDocker": "Usar Docker",
+    "dockerImage": "Imagen Docker",
+    "enforceOutputFormat": "Forzar Formato de Salida",
+    "noPreserveMetadata": "No Preservar Metadatos",
+    "copyImages": "Copiar Imágenes",
+    "output": "Salida"
+  },
+  "placeholders": {
+    "selectBinary": "Seleccionar archivo binario...",
+    "selectFolder": "Seleccionar carpeta...",
+    "dockerImage": "Nombre de imagen Docker"
+  },
+  "tooltips": {
+    "liltBinary": "Ruta al ejecutable binario de Lilt. Use 'Identificar' para encontrarlo automáticamente en PATH.",
+    "soxBinary": "Ruta al binario SoX (requerido cuando no se usa Docker).",
+    "ffmpegBinary": "Ruta al binario FFmpeg (requerido para soporte ALAC cuando no se usa Docker).",
+    "ffprobeBinary": "Ruta al binario FFprobe (requerido para metadatos cuando no se usa Docker).",
+    "sourceFolder": "Carpeta que contiene archivos de audio para convertir.",
+    "targetFolder": "Carpeta de destino para archivos convertidos.",
+    "useDocker": "Usar contenedor Docker para procesamiento (recomendado). Cuando está habilitado, no se requieren binarios locales.",
+    "dockerImage": "Imagen Docker a usar para procesamiento. Por defecto: ardakilic/sox_ng:latest",
+    "enforceOutputFormat": "Convertir todos los archivos de audio al formato especificado.",
+    "noPreserveMetadata": "Omitir copia de metadatos y arte de portada de archivos originales.",
+    "copyImages": "Copiar archivos JPG y PNG de la carpeta origen a la destino.",
+    "downloadLilt": "Descargar el último binario Lilt de las releases de GitHub."
+  },
+  "options": {
+    "flac": "FLAC",
+    "mp3": "MP3",
+    "alac": "ALAC"
+  },
+  "messages": {
+    "selectSourceFolder": "Por favor seleccione una carpeta origen",
+    "selectTargetFolder": "Por favor seleccione una carpeta destino",
+    "selectLiltBinary": "Por favor seleccione o identifique el binario Lilt",
+    "binaryNotFound": "Binario no encontrado en PATH",
+    "binaryFound": "Binario encontrado: {{path}}",
+    "processStarted": "Transcodificación iniciada",
+    "processStopped": "Transcodificación detenida",
+    "processFinished": "Transcodificación terminada con código {{code}}",
+    "processError": "Error de proceso: {{error}}",
+    "downloadStarted": "Descarga iniciada",
+    "downloadCompleted": "Descarga completada: {{path}}",
+    "downloadFailed": "Descarga falló: {{error}}",
+    "unsupportedPlatform": "Plataforma o arquitectura no compatible",
+    "settingsSaved": "Configuración guardada"
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}
