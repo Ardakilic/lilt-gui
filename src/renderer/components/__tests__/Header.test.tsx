@@ -35,6 +35,12 @@ describe('Header Component', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // Mock console.error to suppress expected error messages in tests
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   it('renders title and version', async () => {

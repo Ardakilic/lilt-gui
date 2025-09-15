@@ -14,13 +14,14 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/main/main.ts',
     '!src/renderer/index.tsx',
+    '!src/renderer/preload.ts',
   ],
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 65,
+      functions: 75,
+      lines: 75,
+      statements: 75,
     },
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],

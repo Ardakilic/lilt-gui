@@ -13,6 +13,15 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Checkbox Component', () => {
+  beforeEach(() => {
+    // Mock console.error to suppress expected warning messages in tests
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('renders with label', () => {
     renderWithTheme(<Checkbox label="Check me" />);
     expect(screen.getByText('Check me')).toBeInTheDocument();
