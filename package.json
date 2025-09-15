@@ -104,6 +104,9 @@
     ],
     "mac": {
       "category": "public.app-category.music",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "identity": null,
       "target": [
         {
           "target": "dmg",

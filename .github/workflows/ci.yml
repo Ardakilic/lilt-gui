@@ -68,24 +68,24 @@ jobs:
       run: |
         echo "Node version: $(node --version)"
         echo "NPM version: $(npm --version)"
-        echo "Python version: $(python3 --version)"
         npx electron-builder --mac --x64
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ELECTRON_CACHE: ${{ runner.temp }}/electron-cache
         ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/electron-builder-cache
+        CSC_IDENTITY_AUTO_DISCOVERY: false # Disable automatic code signing
         DEBUG: electron-builder
 
     - name: Build Electron app (macOS - Apple Silicon ARM64)
       run: |
         echo "Node version: $(node --version)"
         echo "NPM version: $(npm --version)"
-        echo "Python version: $(python3 --version)"
         npx electron-builder --mac --arm64
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ELECTRON_CACHE: ${{ runner.temp }}/electron-cache
         ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/electron-builder-cache
+        CSC_IDENTITY_AUTO_DISCOVERY: false # Disable automatic code signing
         DEBUG: electron-builder
 
     - name: Upload artifacts
