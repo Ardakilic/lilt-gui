@@ -36,14 +36,9 @@ jobs:
     - name: Run tests with coverage
       run: npm run test:coverage
 
-  build:
+  build-macos:
     needs: test
-    runs-on: ${{ matrix.os }}
-    
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-        node-version: [22]
+    runs-on: macos-latest
 
     steps:
     - name: Checkout code
@@ -52,14 +47,13 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v5
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 22
         cache: 'npm'
 
     - name: Install dependencies
       run: npm ci
 
-    - name: Install Python dependencies (macOS)
-      if: matrix.os == 'macos-latest'
+    - name: Install Python dependencies
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install setuptools
@@ -68,7 +62,6 @@ jobs:
       run: npm run build
 
     - name: Build Electron app (macOS - Intel x64)
-      if: matrix.os == 'macos-latest'
       run: |
         echo "Node version: $(node --version)"
         echo "NPM version: $(npm --version)"
@@ -81,7 +74,6 @@ jobs:
         DEBUG: electron-builder
 
     - name: Build Electron app (macOS - Apple Silicon ARM64)
-      if: matrix.os == 'macos-latest'
       run: |
         echo "Node version: $(node --version)"
         echo "NPM version: $(npm --version)"
@@ -93,32 +85,7 @@ jobs:
         ELECTRON_BUILDER_CACHE: ${{ runner.temp }}/electron-builder-cache
         DEBUG: electron-builder
 
-    - name: Build Electron app (Windows - x64)
-      if: matrix.os == 'windows-latest'
-      run: npx electron-builder --win --x64
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Build Electron app (Windows - ARM64)
-      if: matrix.os == 'windows-latest'
-      run: npx electron-builder --win --arm64
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Build Electron app (Linux - x64)
-      if: matrix.os == 'ubuntu-latest'
-      run: npx electron-builder --linux --x64
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Build Electron app (Linux - ARM64)
-      if: matrix.os == 'ubuntu-latest'
-      run: npx electron-builder --linux --arm64
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload artifacts (macOS)
-      if: matrix.os == 'macos-latest'
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: lilt-gui-macos
@@ -127,8 +94,37 @@ jobs:
           release/**/*.dmg
           release/**/*.zip
 
-    - name: Upload artifacts (Windows)
-      if: matrix.os == 'windows-latest'
+  build-windows:
+    needs: test
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build application
+      run: npm run build
+
+    - name: Build Electron app (Windows - x64)
+      run: npx electron-builder --win --x64
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Electron app (Windows - ARM64)
+      run: npx electron-builder --win --arm64
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: lilt-gui-windows
@@ -137,8 +133,37 @@ jobs:
           release/**/*.exe
           release/**/*.msi
 
-    - name: Upload artifacts (Linux)
-      if: matrix.os == 'ubuntu-latest'
+  build-linux:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build application
+      run: npm run build
+
+    - name: Build Electron app (Linux - x64)
+      run: npx electron-builder --linux --x64
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build Electron app (Linux - ARM64)
+      run: npx electron-builder --linux --arm64
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: lilt-gui-linux
@@ -149,7 +174,7 @@ jobs:
           release/**/*.deb
 
   release:
-    needs: build
+    needs: [build-macos, build-windows, build-linux]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
