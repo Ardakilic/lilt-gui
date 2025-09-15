@@ -69,6 +69,7 @@
     "css-loader": "^6.8.1",
     "electron": "^28.0.0",
     "electron-builder": "^24.8.1",
+    "dmg-license": "^1.0.11",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
