@@ -9,6 +9,8 @@
     "start": "Iniciar Transcodificación",
     "stop": "Detener Transcodificación",
     "download": "Descargar Lilt",
+    "help": "Ayuda",
+    "close": "Cerrar",
     "changeLanguage": "Cambiar Idioma"
   },
   "labels": {
@@ -78,5 +80,37 @@
   "status": {
     "running": "Ejecutándose",
     "ready": "Listo"
+  },
+  "help": {
+    "title": "Acerca de Lilt GUI",
+    "about": {
+      "title": "¿Qué es Lilt GUI?",
+      "description": "Lilt GUI es una interfaz gráfica de usuario moderna y multiplataforma para Lilt - el transcodificador sin pérdidas inteligente y ligero para archivos FLAC y ALAC de alta resolución.",
+      "purpose": "Esta aplicación proporciona una interfaz intuitiva para convertir archivos de audio de alta resolución preservando la calidad y los metadatos."
+    },
+    "features": {
+      "title": "Características Principales",
+      "modern": "Interfaz moderna con soporte para tema oscuro/claro",
+      "docker": "Integración Docker incorporada para transcodificación sin complicaciones",
+      "formats": "Soporte para formatos de salida FLAC, ALAC y MP3",
+      "batch": "Procesamiento por lotes con estructura de carpetas preservada",
+      "metadata": "Copia opcional de etiquetas ID3 y arte de portada",
+      "multilang": "Soporte multiidioma (Inglés, Turco, Alemán, Español)"
+    },
+    "usage": {
+      "title": "Cómo Usar",
+      "step1": "1. Configurar rutas de binarios o habilitar modo Docker",
+      "step2": "2. Seleccionar carpeta origen que contenga sus archivos de audio",
+      "step3": "3. Elegir carpeta destino para archivos convertidos",
+      "step4": "4. Configurar opciones de conversión según sea necesario",
+      "step5": "5. Hacer clic en 'Iniciar Transcodificación' para comenzar la conversión"
+    },
+    "author": {
+      "title": "Acerca del Autor",
+      "name": "Creado por",
+      "github": "GitHub",
+      "project": "Proyecto Lilt GUI",
+      "lilt": "Herramienta Principal Lilt"
+    }
   }
 }

@@ -31,6 +31,7 @@ describe('Header Component', () => {
     onLanguageChange: jest.fn(),
     currentLanguage: 'en',
     onDownloadLilt: jest.fn(),
+    onShowHelp: jest.fn(),
   };
 
   beforeEach(() => {
@@ -61,6 +62,16 @@ describe('Header Component', () => {
     fireEvent.click(downloadButton);
     
     expect(onDownloadLilt).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onShowHelp when help button is clicked', () => {
+    const onShowHelp = jest.fn();
+    renderWithProviders(<Header {...defaultProps} onShowHelp={onShowHelp} />);
+    
+    const helpButton = screen.getByText(/Help/i);
+    fireEvent.click(helpButton);
+    
+    expect(onShowHelp).toHaveBeenCalledTimes(1);
   });
 
   it('calls onLanguageChange when language is changed', () => {

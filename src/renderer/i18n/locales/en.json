@@ -9,6 +9,8 @@
     "start": "Start Transcoding",
     "stop": "Stop Transcoding",
     "download": "Download Lilt",
+    "help": "Help",
+    "close": "Close",
     "changeLanguage": "Change Language"
   },
   "labels": {
@@ -78,5 +80,37 @@
   "status": {
     "running": "Running",
     "ready": "Ready"
+  },
+  "help": {
+    "title": "About Lilt GUI",
+    "about": {
+      "title": "What is Lilt GUI?",
+      "description": "Lilt GUI is a modern, cross-platform graphical user interface for Lilt - the lightweight intelligent lossless transcoder for Hi-Res FLAC and ALAC files.",
+      "purpose": "This application provides an intuitive interface to convert high-resolution audio files while preserving quality and metadata."
+    },
+    "features": {
+      "title": "Key Features",
+      "modern": "Modern interface with dark/light theme support",
+      "docker": "Built-in Docker integration for hassle-free transcoding",
+      "formats": "Support for FLAC, ALAC, and MP3 output formats",
+      "batch": "Batch processing with preserved folder structure",
+      "metadata": "Optional copying of ID3 tags and cover art",
+      "multilang": "Multi-language support (English, Turkish, German, Spanish)"
+    },
+    "usage": {
+      "title": "How to Use",
+      "step1": "1. Configure binary paths or enable Docker mode",
+      "step2": "2. Select source folder containing your audio files",
+      "step3": "3. Choose target folder for converted files",
+      "step4": "4. Configure conversion options as needed",
+      "step5": "5. Click 'Start Transcoding' to begin conversion"
+    },
+    "author": {
+      "title": "About the Author",
+      "name": "Created by",
+      "github": "GitHub",
+      "project": "Lilt GUI Project",
+      "lilt": "Lilt Core Tool"
+    }
   }
 }

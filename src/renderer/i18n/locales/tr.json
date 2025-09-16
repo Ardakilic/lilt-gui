@@ -9,6 +9,8 @@
     "start": "Dönüştürmeyi Başlat",
     "stop": "Dönüştürmeyi Durdur",
     "download": "Lilt İndir",
+    "help": "Yardım",
+    "close": "Kapat",
     "changeLanguage": "Dil Değiştir"
   },
   "labels": {
@@ -78,5 +80,37 @@
   "status": {
     "running": "Çalışıyor",
     "ready": "Hazır"
+  },
+  "help": {
+    "title": "Lilt GUI Hakkında",
+    "about": {
+      "title": "Lilt GUI Nedir?",
+      "description": "Lilt GUI, Hi-Res FLAC ve ALAC dosyaları için hafif akıllı kayıpsız transkoder olan Lilt için modern, çapraz platform grafik kullanıcı arayüzüdür.",
+      "purpose": "Bu uygulama, kalite ve metadata'yı koruyarak yüksek çözünürlüklü ses dosyalarını dönüştürmek için sezgisel bir arayüz sağlar."
+    },
+    "features": {
+      "title": "Temel Özellikler",
+      "modern": "Koyu/açık tema desteği ile modern arayüz",
+      "docker": "Zahmetsiz transkodlama için yerleşik Docker entegrasyonu",
+      "formats": "FLAC, ALAC ve MP3 çıktı formatları desteği",
+      "batch": "Korunmuş klasör yapısı ile toplu işleme",
+      "metadata": "ID3 etiketleri ve kapak resmi kopyalama seçeneği",
+      "multilang": "Çoklu dil desteği (İngilizce, Türkçe, Almanca, İspanyolca)"
+    },
+    "usage": {
+      "title": "Nasıl Kullanılır",
+      "step1": "1. Binary yollarını yapılandırın veya Docker modunu etkinleştirin",
+      "step2": "2. Ses dosyalarınızı içeren kaynak klasörü seçin",
+      "step3": "3. Dönüştürülmüş dosyalar için hedef klasörü seçin",
+      "step4": "4. Gerektiğinde dönüştürme seçeneklerini yapılandırın",
+      "step5": "5. Dönüştürmeyi başlatmak için 'Dönüştürmeyi Başlat'a tıklayın"
+    },
+    "author": {
+      "title": "Yazar Hakkında",
+      "name": "Oluşturan",
+      "github": "GitHub",
+      "project": "Lilt GUI Projesi",
+      "lilt": "Lilt Temel Aracı"
+    }
   }
 }

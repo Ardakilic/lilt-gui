@@ -10,6 +10,7 @@ import { ActionsSection } from './components/ActionsSection';
 import { OutputSection } from './components/OutputSection';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { Notification } from './components/Notification';
+import { HelpDialog } from './components/HelpDialog';
 import { theme } from './styles/theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -77,6 +78,7 @@ export const App: React.FC = () => {
     type: 'success' | 'error' | 'info';
   } | null>(null);
   const [isProcessRunning, setIsProcessRunning] = useState(false);
+  const [isHelpDialogOpen, setIsHelpDialogOpen] = useState(false);
   const [output, setOutput] = useState<string[]>([]);
 
   const showNotification = useCallback((message: string, type: 'success' | 'error' | 'info') => {
@@ -229,6 +231,14 @@ export const App: React.FC = () => {
     }
   };
 
+  const showHelp = () => {
+    setIsHelpDialogOpen(true);
+  };
+
+  const closeHelp = () => {
+    setIsHelpDialogOpen(false);
+  };
+
   const changeLanguage = (language: string) => {
     updateSetting('language', language);
     i18n.changeLanguage(language);
@@ -253,6 +263,7 @@ export const App: React.FC = () => {
           onLanguageChange={changeLanguage}
           currentLanguage={settings.language}
           onDownloadLilt={downloadLilt}
+          onShowHelp={showHelp}
         />
         
         <MainContent>
@@ -301,6 +312,11 @@ export const App: React.FC = () => {
             onClose={() => setNotification(null)}
           />
         )}
+        
+        <HelpDialog
+          isOpen={isHelpDialogOpen}
+          onClose={closeHelp}
+        />
       </Container>
     </ThemeProvider>
   );

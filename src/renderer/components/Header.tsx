@@ -59,16 +59,29 @@ const DownloadButton = styled(Button)`
   }
 `;
 
+const HelpButton = styled(Button)`
+  background: ${props => props.theme.colors.info};
+  color: white;
+  border: none;
+  min-width: 60px;
+  
+  &:hover {
+    background: #0369a1;
+  }
+`;
+
 interface HeaderProps {
   onLanguageChange: (language: string) => void;
   currentLanguage: string;
   onDownloadLilt: () => void;
+  onShowHelp: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onLanguageChange,
   currentLanguage,
   onDownloadLilt,
+  onShowHelp,
 }) => {
   const { t } = useTranslation();
   const [version, setVersion] = useState<string>('');
@@ -104,6 +117,10 @@ export const Header: React.FC<HeaderProps> = ({
         <DownloadButton onClick={onDownloadLilt}>
           {t('buttons.download')}
         </DownloadButton>
+        
+        <HelpButton onClick={onShowHelp}>
+          {t('buttons.help')}
+        </HelpButton>
         
         <LanguageSelect
           value={currentLanguage}
