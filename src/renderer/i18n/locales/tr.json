@@ -48,7 +48,7 @@
     "enforceOutputFormat": "Tüm ses dosyalarını belirtilen formata dönüştür.",
     "noPreserveMetadata": "Orijinal dosyalardan metadata ve kapak resmini kopyalamayı atla.",
     "copyImages": "JPG ve PNG dosyalarını kaynak klasörden hedef klasöre kopyala.",
-    "downloadLilt": "GitHub releases'den en son Lilt binary'sini indir."
+    "downloadLilt": "En son Lilt binary'sini indirmek için GitHub releases sayfasını aç."
   },
   "options": {
     "default": "Varsayılan (Akıllı Dönüştürme)",
@@ -66,9 +66,6 @@
     "processStopped": "Dönüştürme durduruldu",
     "processFinished": "Dönüştürme {{code}} koduyla tamamlandı",
     "processError": "İşlem hatası: {{error}}",
-    "downloadStarted": "İndirme başlatıldı",
-    "downloadCompleted": "İndirme tamamlandı: {{path}}",
-    "downloadFailed": "İndirme başarısız: {{error}}. Lütfen Lilt binary'sinin platformunuz için mevcut olup olmadığını kontrol edin.",
     "unsupportedPlatform": "Desteklenmeyen platform veya mimari",
     "settingsSaved": "Ayarlar kaydedildi"
   },

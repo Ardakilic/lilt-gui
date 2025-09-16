@@ -29,7 +29,6 @@ const mockElectronAPI = {
   startLilt: jest.fn(),
   stopLilt: jest.fn(),
   getProcessStatus: jest.fn(),
-  downloadLilt: jest.fn(),
   openExternal: jest.fn(),
   getAppVersion: jest.fn().mockResolvedValue('1.0.0'),
   getPlatformInfo: jest.fn().mockResolvedValue({ platform: 'darwin', arch: 'x64' }),

@@ -48,7 +48,7 @@
     "enforceOutputFormat": "Convert all audio files to the specified format.",
     "noPreserveMetadata": "Skip copying metadata and cover art from original files.",
     "copyImages": "Copy JPG and PNG files from source to target directory.",
-    "downloadLilt": "Download the latest Lilt binary from GitHub releases."
+    "downloadLilt": "Open GitHub releases page to download the latest Lilt binary."
   },
   "options": {
     "default": "Default (Smart Conversion)",
@@ -66,9 +66,6 @@
     "processStopped": "Transcoding stopped",
     "processFinished": "Transcoding finished with code {{code}}",
     "processError": "Process error: {{error}}",
-    "downloadStarted": "Download started",
-    "downloadCompleted": "Download completed: {{path}}",
-    "downloadFailed": "Download failed: {{error}}. Please check if the Lilt binary is available for your platform.",
     "unsupportedPlatform": "Unsupported platform or architecture",
     "settingsSaved": "Settings saved"
   },

@@ -223,17 +223,9 @@ export const App: React.FC = () => {
 
   const downloadLilt = async () => {
     try {
-      showNotification(t('messages.downloadStarted'), 'info');
-      const result = await window.electronAPI.downloadLilt();
-      
-      if (result.success && result.path) {
-        updateSetting('liltBinaryPath', result.path);
-        showNotification(t('messages.downloadCompleted', { path: result.path }), 'success');
-      } else {
-        showNotification(t('messages.downloadFailed', { error: result.error }), 'error');
-      }
+      await window.electronAPI.openExternal('https://github.com/Ardakilic/lilt/releases/latest');
     } catch (error) {
-      showNotification(t('messages.downloadFailed', { error: 'Unknown error' }), 'error');
+      showNotification('Failed to open GitHub releases page', 'error');
     }
   };
 

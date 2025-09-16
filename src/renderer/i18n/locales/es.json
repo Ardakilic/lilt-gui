@@ -42,7 +42,7 @@
     "enforceOutputFormat": "Convertir todos los archivos de audio al formato especificado.",
     "noPreserveMetadata": "Omitir copia de metadatos y arte de portada de archivos originales.",
     "copyImages": "Copiar archivos JPG y PNG de la carpeta origen a la destino.",
-    "downloadLilt": "Descargar el último binario Lilt de las releases de GitHub."
+    "downloadLilt": "Abrir la página de releases de GitHub para descargar el último binario Lilt."
   },
   "options": {
     "default": "Por Defecto (Conversión Inteligente)",
@@ -66,9 +66,6 @@
     "processStopped": "Transcodificación detenida",
     "processFinished": "Transcodificación terminada con código {{code}}",
     "processError": "Error de proceso: {{error}}",
-    "downloadStarted": "Descarga iniciada",
-    "downloadCompleted": "Descarga completada: {{path}}",
-    "downloadFailed": "Descarga falló: {{error}}",
     "unsupportedPlatform": "Plataforma o arquitectura no compatible",
     "settingsSaved": "Configuración guardada"
   },

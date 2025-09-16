@@ -1,11 +1,10 @@
 import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
 import { join } from 'path';
 import Store from 'electron-store';
-import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo, DownloadProgress } from '@shared/types';
+import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo } from '@shared/types';
 import { exec, spawn, ChildProcess } from 'child_process';
 import { promisify } from 'util';
-import { access, constants, createWriteStream, chmod, unlink } from 'fs';
-import { get } from 'https';
+import { access, constants } from 'fs';
 
 const execAsync = promisify(exec);
 const accessAsync = promisify(access);
@@ -143,11 +142,6 @@ class LiltGUI {
 
     ipcMain.handle('get-process-status', () => {
       return this.processStatus;
-    });
-
-    // Lilt binary download
-    ipcMain.handle('download-lilt', async (_event, progressCallback?: (progress: DownloadProgress) => void) => {
-      return await this.downloadLiltBinary(progressCallback);
     });
 
     // Utility functions
@@ -321,32 +315,6 @@ class LiltGUI {
     }
   }
 
-  private async downloadLiltBinary(progressCallback?: (progress: DownloadProgress) => void): Promise<{ success: boolean; error?: string; path?: string }> {
-    try {
-      const platformInfo = this.getPlatformInfo();
-      if (!platformInfo) {
-        return { success: false, error: 'Unsupported platform or architecture' };
-      }
-
-      const downloadUrl = `https://github.com/Ardakilic/lilt/releases/latest/download/lilt-${platformInfo.os}-${platformInfo.arch}${platformInfo.ext}`;
-      const outputPath = join(app.getPath('userData'), `lilt${platformInfo.ext}`);
-
-      await this.downloadFile(downloadUrl, outputPath, progressCallback);
-      
-      // Make executable on Unix-like systems
-      if (process.platform !== 'win32') {
-        await promisify(chmod)(outputPath, 0o755);
-      }
-
-      return { success: true, path: outputPath };
-    } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Download failed' 
-      };
-    }
-  }
-
   private getPlatformInfo(): { os: string; arch: string; ext: string } | null {
     const platform = process.platform;
     const arch = process.arch;
@@ -392,55 +360,6 @@ class LiltGUI {
     }
 
     return { os, arch: archName, ext };
-  }
-
-  private downloadFile(url: string, outputPath: string, progressCallback?: (progress: DownloadProgress) => void): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const file = createWriteStream(outputPath);
-      
-      get(url, (response) => {
-        if (response.statusCode === 302 || response.statusCode === 301) {
-          // Handle redirect
-          const redirectUrl = response.headers.location;
-          if (redirectUrl) {
-            return this.downloadFile(redirectUrl, outputPath, progressCallback)
-              .then(resolve)
-              .catch(reject);
-          }
-        }
-
-        if (response.statusCode !== 200) {
-          reject(new Error(`HTTP ${response.statusCode}: ${response.statusMessage}`));
-          return;
-        }
-
-        const totalSize = parseInt(response.headers['content-length'] || '0', 10);
-        let downloadedSize = 0;
-
-        response.on('data', (chunk) => {
-          downloadedSize += chunk.length;
-          if (progressCallback && totalSize > 0) {
-            progressCallback({
-              percent: (downloadedSize / totalSize) * 100,
-              transferred: downloadedSize,
-              total: totalSize
-            });
-          }
-        });
-
-        response.pipe(file);
-
-        file.on('finish', () => {
-          file.close();
-          resolve();
-        });
-
-        file.on('error', (error) => {
-          unlink(outputPath, () => {}); // Clean up on error
-          reject(error);
-        });
-      }).on('error', reject);
-    });
   }
 }
 

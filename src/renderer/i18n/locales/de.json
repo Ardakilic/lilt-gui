@@ -42,7 +42,7 @@
     "enforceOutputFormat": "Alle Audiodateien in das angegebene Format konvertieren.",
     "noPreserveMetadata": "Kopieren von Metadaten und Coverart aus Originaldateien überspringen.",
     "copyImages": "JPG- und PNG-Dateien vom Quell- in den Zielordner kopieren.",
-    "downloadLilt": "Neueste Lilt Binary von GitHub Releases herunterladen."
+    "downloadLilt": "GitHub Releases-Seite öffnen, um die neueste Lilt Binary herunterzuladen."
   },
   "options": {
     "default": "Standard (Intelligente Konvertierung)",
@@ -66,9 +66,6 @@
     "processStopped": "Transkodierung gestoppt",
     "processFinished": "Transkodierung mit Code {{code}} beendet",
     "processError": "Prozessfehler: {{error}}",
-    "downloadStarted": "Download gestartet",
-    "downloadCompleted": "Download abgeschlossen: {{path}}",
-    "downloadFailed": "Download fehlgeschlagen: {{error}}",
     "unsupportedPlatform": "Nicht unterstützte Plattform oder Architektur",
     "settingsSaved": "Einstellungen gespeichert"
   },

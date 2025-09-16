@@ -36,9 +36,3 @@ export interface BinaryInfo {
   version?: string;
   isAvailable: boolean;
 }
-
-export interface DownloadProgress {
-  percent: number;
-  transferred: number;
-  total: number;
-}

@@ -24,10 +24,6 @@ const electronAPI = {
   stopLilt: (): Promise<{ success: boolean }> => ipcRenderer.invoke('stop-lilt'),
   getProcessStatus: (): Promise<ProcessStatus> => ipcRenderer.invoke('get-process-status'),
 
-  // Lilt binary download
-  downloadLilt: (): Promise<{ success: boolean; error?: string; path?: string }> => 
-    ipcRenderer.invoke('download-lilt'),
-
   // Utility
   openExternal: (url: string): Promise<void> => ipcRenderer.invoke('open-external', url),
   getAppVersion: (): Promise<string> => ipcRenderer.invoke('get-app-version'),
