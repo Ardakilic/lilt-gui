@@ -45,9 +45,16 @@
     "downloadLilt": "Descargar el último binario Lilt de las releases de GitHub."
   },
   "options": {
+    "default": "Por Defecto (Conversión Inteligente)",
     "flac": "FLAC",
     "mp3": "MP3",
     "alac": "ALAC"
+  },
+  "sections": {
+    "binaryConfiguration": "Configuración de Binarios",
+    "folderConfiguration": "Configuración de Carpetas",
+    "conversionOptions": "Opciones de Conversión",
+    "actions": "Acciones"
   },
   "messages": {
     "selectSourceFolder": "Por favor seleccione una carpeta origen",
@@ -70,5 +77,9 @@
     "tr": "Türkçe",
     "de": "Deutsch",
     "es": "Español"
+  },
+  "status": {
+    "running": "Ejecutándose",
+    "ready": "Listo"
   }
 }

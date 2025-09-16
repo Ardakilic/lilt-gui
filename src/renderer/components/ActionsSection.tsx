@@ -92,7 +92,7 @@ export const ActionsSection: React.FC<ActionsSectionProps> = ({
 
   return (
     <div>
-      <SectionTitle>Actions</SectionTitle>
+      <SectionTitle>{t('sections.actions')}</SectionTitle>
       
       <ButtonGroup>
         <StartButton
@@ -113,7 +113,7 @@ export const ActionsSection: React.FC<ActionsSectionProps> = ({
         
         <ProcessIndicator $isRunning={isProcessRunning}>
           <StatusDot $isRunning={isProcessRunning} />
-          {isProcessRunning ? 'Running' : 'Ready'}
+          {isProcessRunning ? t('status.running') : t('status.ready')}
         </ProcessIndicator>
       </ButtonGroup>
     </div>

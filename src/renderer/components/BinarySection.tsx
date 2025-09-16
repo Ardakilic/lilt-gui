@@ -131,7 +131,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
 
   return (
     <div>
-      <SectionTitle>Binary Configuration</SectionTitle>
+      <SectionTitle>{t('sections.binaryConfiguration')}</SectionTitle>
       
       {binaryConfigs.map((config) => (
         <BinaryGroup key={config.key}>

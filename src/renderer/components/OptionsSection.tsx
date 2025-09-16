@@ -51,7 +51,7 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
   const { t } = useTranslation();
 
   const outputFormatOptions = [
-    { value: '', label: 'Default (Smart Conversion)' },
+    { value: '', label: t('options.default') },
     { value: 'flac', label: t('options.flac') },
     { value: 'mp3', label: t('options.mp3') },
     { value: 'alac', label: t('options.alac') },
@@ -59,7 +59,7 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
 
   return (
     <div>
-      <SectionTitle>Conversion Options</SectionTitle>
+      <SectionTitle>{t('sections.conversionOptions')}</SectionTitle>
       
       <OptionGroup>
         <Tooltip content={t('tooltips.useDocker')}>

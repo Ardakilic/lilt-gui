@@ -86,7 +86,7 @@ export const FolderSection: React.FC<FolderSectionProps> = ({
 
   return (
     <div>
-      <SectionTitle>Folder Configuration</SectionTitle>
+      <SectionTitle>{t('sections.folderConfiguration')}</SectionTitle>
       
       {folderConfigs.map((config) => (
         <FolderGroup key={config.key}>

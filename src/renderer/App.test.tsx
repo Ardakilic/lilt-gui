@@ -82,11 +82,11 @@ describe('App Component', () => {
       expect(screen.getByText('app.title')).toBeInTheDocument();
     });
     
-    // Check if main sections are rendered
-    expect(screen.getByText('Binary Configuration')).toBeInTheDocument();
-    expect(screen.getByText('Folder Configuration')).toBeInTheDocument();
-    expect(screen.getByText('Conversion Options')).toBeInTheDocument();
-    expect(screen.getByText('Actions')).toBeInTheDocument();
+    // Check if main sections are rendered (showing translation keys in test environment)
+    expect(screen.getByText('sections.binaryConfiguration')).toBeInTheDocument();
+    expect(screen.getByText('sections.folderConfiguration')).toBeInTheDocument();
+    expect(screen.getByText('sections.conversionOptions')).toBeInTheDocument();
+    expect(screen.getByText('sections.actions')).toBeInTheDocument();
   });
 
   it('handles settings loading error gracefully', async () => {

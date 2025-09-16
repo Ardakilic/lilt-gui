@@ -25,6 +25,12 @@
     "copyImages": "Resimleri Kopyala",
     "output": "Çıktı"
   },
+  "sections": {
+    "binaryConfiguration": "Binary Yapılandırması",
+    "folderConfiguration": "Klasör Yapılandırması",
+    "conversionOptions": "Dönüştürme Seçenekleri",
+    "actions": "İşlemler"
+  },
   "placeholders": {
     "selectBinary": "Binary dosyasını seçin...",
     "selectFolder": "Klasör seçin...",
@@ -45,6 +51,7 @@
     "downloadLilt": "GitHub releases'den en son Lilt binary'sini indir."
   },
   "options": {
+    "default": "Varsayılan (Akıllı Dönüştürme)",
     "flac": "FLAC",
     "mp3": "MP3",
     "alac": "ALAC"
@@ -61,7 +68,7 @@
     "processError": "İşlem hatası: {{error}}",
     "downloadStarted": "İndirme başlatıldı",
     "downloadCompleted": "İndirme tamamlandı: {{path}}",
-    "downloadFailed": "İndirme başarısız: {{error}}",
+    "downloadFailed": "İndirme başarısız: {{error}}. Lütfen Lilt binary'sinin platformunuz için mevcut olup olmadığını kontrol edin.",
     "unsupportedPlatform": "Desteklenmeyen platform veya mimari",
     "settingsSaved": "Ayarlar kaydedildi"
   },
@@ -70,5 +77,9 @@
     "tr": "Türkçe",
     "de": "Deutsch",
     "es": "Español"
+  },
+  "status": {
+    "running": "Çalışıyor",
+    "ready": "Hazır"
   }
 }

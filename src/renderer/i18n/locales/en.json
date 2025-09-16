@@ -25,6 +25,12 @@
     "copyImages": "Copy Images",
     "output": "Output"
   },
+  "sections": {
+    "binaryConfiguration": "Binary Configuration",
+    "folderConfiguration": "Folder Configuration",
+    "conversionOptions": "Conversion Options",
+    "actions": "Actions"
+  },
   "placeholders": {
     "selectBinary": "Select binary file...",
     "selectFolder": "Select folder...",
@@ -45,6 +51,7 @@
     "downloadLilt": "Download the latest Lilt binary from GitHub releases."
   },
   "options": {
+    "default": "Default (Smart Conversion)",
     "flac": "FLAC",
     "mp3": "MP3",
     "alac": "ALAC"
@@ -61,7 +68,7 @@
     "processError": "Process error: {{error}}",
     "downloadStarted": "Download started",
     "downloadCompleted": "Download completed: {{path}}",
-    "downloadFailed": "Download failed: {{error}}",
+    "downloadFailed": "Download failed: {{error}}. Please check if the Lilt binary is available for your platform.",
     "unsupportedPlatform": "Unsupported platform or architecture",
     "settingsSaved": "Settings saved"
   },
@@ -70,5 +77,9 @@
     "tr": "Türkçe",
     "de": "Deutsch",
     "es": "Español"
+  },
+  "status": {
+    "running": "Running",
+    "ready": "Ready"
   }
 }
