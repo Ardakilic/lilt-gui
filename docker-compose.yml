@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Development environment
+  dev:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/src-tauri/target
+    ports:
+      - '1420:1420'
+    environment:
+      - NODE_ENV=development
+      - TAURI_DEBUG=true
+    stdin_open: true
+    tty: true
+    command: npm run tauri:dev
+
+  # Build environment
+  build:
+    build:
+      context: .
+      target: build
+    volumes:
+      - .:/app
+      - ./build_output:/app/src-tauri/target/release
+    environment:
+      - NODE_ENV=production
+    command: npm run tauri:build
+
+  # Testing environment
+  test:
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=test
+    command: npm run test:coverage

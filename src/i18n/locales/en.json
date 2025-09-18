@@ -1,0 +1,111 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Version {{version}}",
+    "description": "Modern GUI for Lilt - Lightweight Intelligent Lossless Transcoder"
+  },
+  "navigation": {
+    "home": "Home",
+    "settings": "Settings",
+    "help": "Help",
+    "language": "Language"
+  },
+  "settings": {
+    "binaries": "Binary Paths",
+    "lilt_path": "Lilt Binary Path",
+    "sox_path": "SoX Binary Path",
+    "sox_ng_path": "SoX-NG Binary Path",
+    "ffmpeg_path": "FFmpeg Binary Path",
+    "ffprobe_path": "FFprobe Binary Path",
+    "browse": "Browse",
+    "identify": "Identify",
+    "docker": "Docker Settings",
+    "use_docker": "Use Docker",
+    "docker_image": "Docker Image",
+    "conversion": "Conversion Options",
+    "enforce_output_format": "Enforce Output Format",
+    "no_preserve_metadata": "Don't preserve metadata",
+    "copy_images": "Copy images (JPG, PNG)",
+    "source_dir": "Source Directory",
+    "target_dir": "Target Directory",
+    "output_format": {
+      "default": "Default (Smart conversion)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    }
+  },
+  "actions": {
+    "start_transcoding": "Start Transcoding",
+    "stop_transcoding": "Stop Transcoding",
+    "download_lilt": "Download Lilt",
+    "clear_output": "Clear Output"
+  },
+  "status": {
+    "ready": "Ready",
+    "running": "Running...",
+    "completed": "Completed",
+    "error": "Error",
+    "stopped": "Stopped"
+  },
+  "output": {
+    "title": "Output",
+    "empty": "No output yet. Start transcoding to see progress.",
+    "error": "Error: {{message}}"
+  },
+  "tooltips": {
+    "lilt_path": "Path to the Lilt binary executable",
+    "sox_path": "Path to SoX (Sound eXchange) binary for audio processing",
+    "sox_ng_path": "Path to SoX-NG binary (alternative to SoX)",
+    "ffmpeg_path": "Path to FFmpeg binary for ALAC support and metadata preservation",
+    "ffprobe_path": "Path to FFprobe binary for audio file analysis",
+    "use_docker": "Use Docker to run audio processing tools instead of local installation",
+    "docker_image": "Docker image containing SoX and FFmpeg tools",
+    "source_dir": "Directory containing audio files to be processed",
+    "target_dir": "Directory where processed audio files will be saved",
+    "enforce_output_format": "Convert all audio files to the specified format",
+    "no_preserve_metadata": "Skip copying metadata and cover art from original files",
+    "copy_images": "Copy JPG and PNG image files along with audio files",
+    "identify": "Automatically find the binary in your system PATH"
+  },
+  "errors": {
+    "binary_not_found": "Binary not found: {{binary}}",
+    "directory_required": "Directory selection is required",
+    "invalid_directory": "Invalid directory path",
+    "process_failed": "Process failed: {{error}}",
+    "file_not_found": "File not found: {{file}}"
+  },
+  "help": {
+    "title": "Help & Information",
+    "about": {
+      "title": "About Lilt GUI",
+      "description": "Lilt GUI is a modern desktop application that provides a user-friendly interface for the Lilt command-line tool. Lilt is a lightweight intelligent lossless transcoder that converts Hi-Res FLAC and ALAC files to 16-bit formats."
+    },
+    "lilt": {
+      "title": "About Lilt",
+      "description": "Lilt is a cross-platform command-line tool written in Go that handles audio transcoding with intelligent quality optimization. It supports FLAC, ALAC, and MP3 formats with various conversion options."
+    },
+    "author": {
+      "title": "Author",
+      "description": "Developed by Arda Kilicdagi",
+      "github": "GitHub Profile",
+      "website": "Visit Website"
+    },
+    "usage": {
+      "title": "How to Use",
+      "steps": [
+        "1. Configure binary paths or enable Docker mode",
+        "2. Select source directory containing audio files",
+        "3. Choose target directory for processed files",
+        "4. Configure conversion options as needed",
+        "5. Click 'Start Transcoding' to begin processing"
+      ]
+    }
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}

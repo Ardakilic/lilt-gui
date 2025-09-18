@@ -1,0 +1,111 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Versión {{version}}",
+    "description": "GUI Moderna para Lilt - Transcodificador Inteligente Ligero Sin Pérdidas"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "settings": "Configuración",
+    "help": "Ayuda",
+    "language": "Idioma"
+  },
+  "settings": {
+    "binaries": "Rutas de Binarios",
+    "lilt_path": "Ruta del Binario Lilt",
+    "sox_path": "Ruta del Binario SoX",
+    "sox_ng_path": "Ruta del Binario SoX-NG",
+    "ffmpeg_path": "Ruta del Binario FFmpeg",
+    "ffprobe_path": "Ruta del Binario FFprobe",
+    "browse": "Examinar",
+    "identify": "Identificar",
+    "docker": "Configuración Docker",
+    "use_docker": "Usar Docker",
+    "docker_image": "Imagen Docker",
+    "conversion": "Opciones de Conversión",
+    "enforce_output_format": "Forzar Formato de Salida",
+    "no_preserve_metadata": "No preservar metadatos",
+    "copy_images": "Copiar imágenes (JPG, PNG)",
+    "source_dir": "Directorio Origen",
+    "target_dir": "Directorio Destino",
+    "output_format": {
+      "default": "Por defecto (Conversión inteligente)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    }
+  },
+  "actions": {
+    "start_transcoding": "Iniciar Transcodificación",
+    "stop_transcoding": "Detener Transcodificación",
+    "download_lilt": "Descargar Lilt",
+    "clear_output": "Limpiar Salida"
+  },
+  "status": {
+    "ready": "Listo",
+    "running": "Ejecutando...",
+    "completed": "Completado",
+    "error": "Error",
+    "stopped": "Detenido"
+  },
+  "output": {
+    "title": "Salida",
+    "empty": "Aún no hay salida. Inicia la transcodificación para ver el progreso.",
+    "error": "Error: {{message}}"
+  },
+  "tooltips": {
+    "lilt_path": "Ruta al archivo ejecutable binario de Lilt",
+    "sox_path": "Ruta al binario SoX (Sound eXchange) para procesamiento de audio",
+    "sox_ng_path": "Ruta al binario SoX-NG (alternativa a SoX)",
+    "ffmpeg_path": "Ruta al binario FFmpeg para soporte ALAC y preservación de metadatos",
+    "ffprobe_path": "Ruta al binario FFprobe para análisis de archivos de audio",
+    "use_docker": "Usar Docker para ejecutar herramientas de procesamiento de audio en lugar de instalación local",
+    "docker_image": "Imagen Docker que contiene herramientas SoX y FFmpeg",
+    "source_dir": "Directorio que contiene archivos de audio a procesar",
+    "target_dir": "Directorio donde se guardarán los archivos de audio procesados",
+    "enforce_output_format": "Convertir todos los archivos de audio al formato especificado",
+    "no_preserve_metadata": "Omitir copia de metadatos y carátula de archivos originales",
+    "copy_images": "Copiar archivos de imagen JPG y PNG junto con archivos de audio",
+    "identify": "Encontrar automáticamente el binario en el PATH del sistema"
+  },
+  "errors": {
+    "binary_not_found": "Binario no encontrado: {{binary}}",
+    "directory_required": "Se requiere selección de directorio",
+    "invalid_directory": "Ruta de directorio inválida",
+    "process_failed": "Proceso falló: {{error}}",
+    "file_not_found": "Archivo no encontrado: {{file}}"
+  },
+  "help": {
+    "title": "Ayuda e Información",
+    "about": {
+      "title": "Acerca de Lilt GUI",
+      "description": "Lilt GUI es una aplicación de escritorio moderna que proporciona una interfaz amigable para la herramienta de línea de comandos Lilt. Lilt es un transcodificador inteligente ligero sin pérdidas que convierte archivos Hi-Res FLAC y ALAC a formatos de 16-bit."
+    },
+    "lilt": {
+      "title": "Acerca de Lilt",
+      "description": "Lilt es una herramienta de línea de comandos multiplataforma escrita en Go que maneja transcodificación de audio con optimización inteligente de calidad. Soporta formatos FLAC, ALAC y MP3 con varias opciones de conversión."
+    },
+    "author": {
+      "title": "Autor",
+      "description": "Desarrollado por Arda Kilicdagi",
+      "github": "Perfil GitHub",
+      "website": "Visitar Sitio Web"
+    },
+    "usage": {
+      "title": "Cómo Usar",
+      "steps": [
+        "1. Configurar rutas de binarios o habilitar modo Docker",
+        "2. Seleccionar directorio origen que contiene archivos de audio",
+        "3. Elegir directorio destino para archivos procesados",
+        "4. Configurar opciones de conversión según sea necesario",
+        "5. Hacer clic en 'Iniciar Transcodificación' para comenzar el procesamiento"
+      ]
+    }
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}

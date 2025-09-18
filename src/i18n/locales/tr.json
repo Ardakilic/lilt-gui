@@ -1,0 +1,111 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "version": "Sürüm {{version}}",
+    "description": "Lilt için Modern GUI - Hafif Akıllı Kayıpsız Transkoder"
+  },
+  "navigation": {
+    "home": "Ana Sayfa",
+    "settings": "Ayarlar",
+    "help": "Yardım",
+    "language": "Dil"
+  },
+  "settings": {
+    "binaries": "İkili Dosya Yolları",
+    "lilt_path": "Lilt İkili Dosya Yolu",
+    "sox_path": "SoX İkili Dosya Yolu",
+    "sox_ng_path": "SoX-NG İkili Dosya Yolu",
+    "ffmpeg_path": "FFmpeg İkili Dosya Yolu",
+    "ffprobe_path": "FFprobe İkili Dosya Yolu",
+    "browse": "Gözat",
+    "identify": "Tanımla",
+    "docker": "Docker Ayarları",
+    "use_docker": "Docker Kullan",
+    "docker_image": "Docker İmajı",
+    "conversion": "Dönüştürme Seçenekleri",
+    "enforce_output_format": "Çıkış Formatını Zorla",
+    "no_preserve_metadata": "Metadata'yı koruma",
+    "copy_images": "Resimleri kopyala (JPG, PNG)",
+    "source_dir": "Kaynak Dizin",
+    "target_dir": "Hedef Dizin",
+    "output_format": {
+      "default": "Varsayılan (Akıllı dönüştürme)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    }
+  },
+  "actions": {
+    "start_transcoding": "Transkodlamayı Başlat",
+    "stop_transcoding": "Transkodlamayı Durdur",
+    "download_lilt": "Lilt İndir",
+    "clear_output": "Çıktıyı Temizle"
+  },
+  "status": {
+    "ready": "Hazır",
+    "running": "Çalışıyor...",
+    "completed": "Tamamlandı",
+    "error": "Hata",
+    "stopped": "Durduruldu"
+  },
+  "output": {
+    "title": "Çıktı",
+    "empty": "Henüz çıktı yok. İlerlemeyi görmek için transkodlamayı başlatın.",
+    "error": "Hata: {{message}}"
+  },
+  "tooltips": {
+    "lilt_path": "Lilt ikili dosyasının yolu",
+    "sox_path": "Ses işleme için SoX (Sound eXchange) ikili dosyasının yolu",
+    "sox_ng_path": "SoX-NG ikili dosyasının yolu (SoX'a alternatif)",
+    "ffmpeg_path": "ALAC desteği ve metadata korunması için FFmpeg ikili dosyasının yolu",
+    "ffprobe_path": "Ses dosyası analizi için FFprobe ikili dosyasının yolu",
+    "use_docker": "Yerel kurulum yerine ses işleme araçlarını çalıştırmak için Docker kullan",
+    "docker_image": "SoX ve FFmpeg araçlarını içeren Docker imajı",
+    "source_dir": "İşlenecek ses dosyalarını içeren dizin",
+    "target_dir": "İşlenmiş ses dosyalarının kaydedileceği dizin",
+    "enforce_output_format": "Tüm ses dosyalarını belirtilen formata dönüştür",
+    "no_preserve_metadata": "Orijinal dosyalardan metadata ve kapak resmini kopyalamayı atla",
+    "copy_images": "Ses dosyalarıyla birlikte JPG ve PNG resim dosyalarını kopyala",
+    "identify": "İkili dosyayı sistem PATH'inde otomatik olarak bul"
+  },
+  "errors": {
+    "binary_not_found": "İkili dosya bulunamadı: {{binary}}",
+    "directory_required": "Dizin seçimi gereklidir",
+    "invalid_directory": "Geçersiz dizin yolu",
+    "process_failed": "İşlem başarısız: {{error}}",
+    "file_not_found": "Dosya bulunamadı: {{file}}"
+  },
+  "help": {
+    "title": "Yardım ve Bilgi",
+    "about": {
+      "title": "Lilt GUI Hakkında",
+      "description": "Lilt GUI, Lilt komut satırı aracı için kullanıcı dostu bir arayüz sağlayan modern bir masaüstü uygulamasıdır. Lilt, Hi-Res FLAC ve ALAC dosyalarını 16-bit formatlara dönüştüren hafif akıllı kayıpsız bir transkoderdir."
+    },
+    "lilt": {
+      "title": "Lilt Hakkında",
+      "description": "Lilt, akıllı kalite optimizasyonu ile ses transkodlamasını işleyen Go ile yazılmış çapraz platform komut satırı aracıdır. Çeşitli dönüştürme seçenekleriyle FLAC, ALAC ve MP3 formatlarını destekler."
+    },
+    "author": {
+      "title": "Yazar",
+      "description": "Arda Kılıçdağı tarafından geliştirildi",
+      "github": "GitHub Profili",
+      "website": "Web Sitesini Ziyaret Et"
+    },
+    "usage": {
+      "title": "Nasıl Kullanılır",
+      "steps": [
+        "1. İkili dosya yollarını yapılandırın veya Docker modunu etkinleştirin",
+        "2. Ses dosyalarını içeren kaynak dizini seçin",
+        "3. İşlenmiş dosyalar için hedef dizini seçin",
+        "4. Gerekirse dönüştürme seçeneklerini yapılandırın",
+        "5. İşlemeyi başlatmak için 'Transkodlamayı Başlat'a tıklayın"
+      ]
+    }
+  },
+  "languages": {
+    "en": "English",
+    "tr": "Türkçe",
+    "de": "Deutsch",
+    "es": "Español"
+  }
+}
