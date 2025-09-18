@@ -65,7 +65,7 @@
     "@typescript-eslint/parser": "^6.13.2",
     "ts-jest": "^29.1.1",
     "babel-loader": "^10.0.0",
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.0.0",
     "css-loader": "^6.8.1",
     "electron": "^28.0.0",
     "electron-builder": "^24.8.1",
