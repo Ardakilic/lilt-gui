@@ -1,5 +1,5 @@
-import type React from 'react';
 import type { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 type ButtonVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'ghost';

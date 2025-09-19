@@ -1,6 +1,5 @@
 import type { AppSettings, LiltConfig } from '@shared/types';
-import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { ActionsSection } from './components/ActionsSection';

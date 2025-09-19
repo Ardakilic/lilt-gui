@@ -1,5 +1,5 @@
-import type React from 'react';
 import type { InputHTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const CheckboxContainer = styled.label`

@@ -24,7 +24,8 @@
       "style": {
         "noUnusedTemplateLiteral": "error",
         "useTemplate": "error",
-        "useNodejsImportProtocol": "error"
+        "useNodejsImportProtocol": "error",
+        "useImportType": "off"
       },
       "suspicious": {
         "noExplicitAny": "warn",
