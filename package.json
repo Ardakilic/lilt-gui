@@ -87,7 +87,7 @@
     "i18next": "^25.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-i18next": "^13.5.0",
+    "react-i18next": "^15.0.0",
     "styled-components": "^6.1.6"
   },
   "build": {
