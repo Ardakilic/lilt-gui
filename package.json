@@ -84,7 +84,7 @@
   },
   "dependencies": {
     "electron-store": "^8.1.0",
-    "i18next": "^23.7.6",
+    "i18next": "^25.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^13.5.0",
