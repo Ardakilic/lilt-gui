@@ -1,16 +1,16 @@
-import React from 'react';
+import type { AppSettings } from '@shared/types';
+import type React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { AppSettings } from '@shared/types';
 import { Button } from './common/Button';
 import { Input } from './common/Input';
 import { Tooltip } from './common/Tooltip';
 
 const SectionTitle = styled.h3`
   margin: 0 0 20px 0;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.lg};
-  font-weight: ${props => props.theme.fontWeight.semibold};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.lg};
+  font-weight: ${(props) => props.theme.fontWeight.semibold};
 `;
 
 const FolderGroup = styled.div`
@@ -20,9 +20,9 @@ const FolderGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.md};
-  font-weight: ${props => props.theme.fontWeight.medium};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.md};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
 `;
 
 const InputGroup = styled.div`
@@ -87,7 +87,7 @@ export const FolderSection: React.FC<FolderSectionProps> = ({
   return (
     <div>
       <SectionTitle>{t('sections.folderConfiguration')}</SectionTitle>
-      
+
       {folderConfigs.map((config) => (
         <FolderGroup key={config.key}>
           <Tooltip content={config.tooltip}>
@@ -96,7 +96,7 @@ export const FolderSection: React.FC<FolderSectionProps> = ({
               {config.required && ' *'}
             </Label>
           </Tooltip>
-          
+
           <InputGroup>
             <FolderInput
               type="text"
@@ -104,11 +104,8 @@ export const FolderSection: React.FC<FolderSectionProps> = ({
               onChange={(e) => onUpdateSetting(config.key, e.target.value)}
               placeholder={config.placeholder}
             />
-            
-            <BrowseButton
-              variant="secondary"
-              onClick={() => handleBrowseFolder(config.key)}
-            >
+
+            <BrowseButton variant="secondary" onClick={() => handleBrowseFolder(config.key)}>
               {t('buttons.browse')}
             </BrowseButton>
           </InputGroup>

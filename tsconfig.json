@@ -24,12 +24,6 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "release"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "release"]
 }

@@ -1,15 +1,11 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Checkbox } from '../common/Checkbox';
 import { theme } from '../../styles/theme';
+import { Checkbox } from '../common/Checkbox';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider theme={theme}>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
 describe('Checkbox Component', () => {
@@ -36,10 +32,10 @@ describe('Checkbox Component', () => {
   it('handles check/uncheck', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Checkbox onChange={handleChange} />);
-    
+
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);
-    
+
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
@@ -58,10 +54,10 @@ describe('Checkbox Component', () => {
   it('calls onChange when clicked', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Checkbox onChange={handleChange} label="Click me" />);
-    
+
     const label = screen.getByText('Click me');
     fireEvent.click(label);
-    
+
     expect(handleChange).toHaveBeenCalled();
   });
 });

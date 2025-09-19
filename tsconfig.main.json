@@ -7,14 +7,6 @@
     "noEmit": false,
     "outDir": "./dist/main"
   },
-  "include": [
-    "src/main/**/*",
-    "src/shared/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "release",
-    "src/renderer/**/*"
-  ]
+  "include": ["src/main/**/*", "src/shared/**/*"],
+  "exclude": ["node_modules", "dist", "release", "src/renderer/**/*"]
 }

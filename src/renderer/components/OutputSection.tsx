@@ -9,22 +9,22 @@ const OutputContainer = styled.div`
 
 const OutputTitle = styled.h3`
   margin: 0 0 12px 0;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.lg};
-  font-weight: ${props => props.theme.fontWeight.semibold};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.lg};
+  font-weight: ${(props) => props.theme.fontWeight.semibold};
 `;
 
 const OutputBox = styled.div`
-  background: ${props => props.theme.colors.gray900};
-  color: ${props => props.theme.colors.gray100};
-  border-radius: ${props => props.theme.borderRadius.md};
+  background: ${(props) => props.theme.colors.gray900};
+  color: ${(props) => props.theme.colors.gray100};
+  border-radius: ${(props) => props.theme.borderRadius.md};
   padding: 16px;
   height: 200px;
   overflow-y: auto;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 13px;
   line-height: 1.4;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.border};
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -39,7 +39,7 @@ const OutputLine = styled.div`
 `;
 
 const EmptyMessage = styled.div`
-  color: ${props => props.theme.colors.textLight};
+  color: ${(props) => props.theme.colors.textLight};
   font-style: italic;
   text-align: center;
   padding: 40px 20px;
@@ -49,7 +49,7 @@ const ScrollButton = styled.button`
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary};
   color: white;
   border: none;
   border-radius: 4px;
@@ -81,14 +81,14 @@ export const OutputSection: React.FC<OutputSectionProps> = ({ output }) => {
     if (outputRef.current && autoScroll) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
-  }, [output, autoScroll]);
+  }, [autoScroll]);
 
   const handleScroll = () => {
     if (!outputRef.current) return;
-    
+
     const { scrollTop, scrollHeight, clientHeight } = outputRef.current;
     const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
-    
+
     setAutoScroll(isAtBottom);
     setShowScrollButton(!isAtBottom && output.length > 0);
   };
@@ -105,27 +105,18 @@ export const OutputSection: React.FC<OutputSectionProps> = ({ output }) => {
     <OutputContainer>
       <OutputTitle>{t('labels.output')}</OutputTitle>
       <OutputWrapper>
-        <OutputBox 
-          ref={outputRef}
-          onScroll={handleScroll}
-        >
+        <OutputBox ref={outputRef} onScroll={handleScroll}>
           {output.length === 0 ? (
-            <EmptyMessage>
-              No output yet. Start transcoding to see progress here.
-            </EmptyMessage>
+            <EmptyMessage>No output yet. Start transcoding to see progress here.</EmptyMessage>
           ) : (
             output.map((line, index) => (
-              <OutputLine key={index}>
-                {line}
-              </OutputLine>
+              <OutputLine key={`output-${index}-${line.slice(0, 20)}`}>{line}</OutputLine>
             ))
           )}
         </OutputBox>
-        
+
         {showScrollButton && (
-          <ScrollButton onClick={scrollToBottom}>
-            ↓ Scroll to bottom
-          </ScrollButton>
+          <ScrollButton onClick={scrollToBottom}>↓ Scroll to bottom</ScrollButton>
         )}
       </OutputWrapper>
     </OutputContainer>

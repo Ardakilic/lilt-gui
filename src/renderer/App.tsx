@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import type { AppSettings, LiltConfig } from '@shared/types';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { AppSettings, LiltConfig } from '@shared/types';
-import { Header } from './components/Header';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { ActionsSection } from './components/ActionsSection';
 import { BinarySection } from './components/BinarySection';
 import { FolderSection } from './components/FolderSection';
-import { OptionsSection } from './components/OptionsSection';
-import { ActionsSection } from './components/ActionsSection';
-import { OutputSection } from './components/OutputSection';
+import { Header } from './components/Header';
+import { HelpDialog } from './components/HelpDialog';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { Notification } from './components/Notification';
-import { HelpDialog } from './components/HelpDialog';
+import { OptionsSection } from './components/OptionsSection';
+import { OutputSection } from './components/OutputSection';
 import { theme } from './styles/theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -100,7 +101,7 @@ export const App: React.FC = () => {
 
   const setupEventListeners = useCallback(() => {
     window.electronAPI.onLiltOutput((output: string) => {
-      setOutput(prev => [...prev, output]);
+      setOutput((prev) => [...prev, output]);
     });
 
     window.electronAPI.onLiltFinished((result) => {
@@ -155,25 +156,32 @@ export const App: React.FC = () => {
     if (settings) {
       const newLastUsedPaths = {
         ...settings.lastUsedPaths,
-        [pathType]: path
+        [pathType]: path,
       };
       updateSetting('lastUsedPaths', newLastUsedPaths);
     }
   };
 
-  const validateConfig = (): string | null => {
+  const validateBasicSettings = (): string | null => {
     if (!settings) return 'Settings not loaded';
     if (!settings.sourceDir) return t('messages.selectSourceFolder');
     if (!settings.targetDir) return t('messages.selectTargetFolder');
     if (!settings.liltBinaryPath) return t('messages.selectLiltBinary');
-    
-    if (!settings.useDocker) {
-      if (!settings.soxBinaryPath) return 'Please select SoX binary';
-      if (!settings.ffmpegBinaryPath) return 'Please select FFmpeg binary';
-      if (!settings.ffprobeBinaryPath) return 'Please select FFprobe binary';
-    }
-    
     return null;
+  };
+
+  const validateBinaryPaths = (): string | null => {
+    if (!settings || settings.useDocker) return null;
+
+    if (!settings.soxBinaryPath) return 'Please select SoX binary';
+    if (!settings.ffmpegBinaryPath) return 'Please select FFmpeg binary';
+    if (!settings.ffprobeBinaryPath) return 'Please select FFprobe binary';
+
+    return null;
+  };
+
+  const validateConfig = (): string | null => {
+    return validateBasicSettings() || validateBinaryPaths();
   };
 
   const startTranscoding = async () => {
@@ -208,7 +216,7 @@ export const App: React.FC = () => {
       } else {
         showNotification(result.error || 'Failed to start process', 'error');
       }
-    } catch (error) {
+    } catch (_error) {
       showNotification('Failed to start transcoding', 'error');
     }
   };
@@ -218,7 +226,7 @@ export const App: React.FC = () => {
       await window.electronAPI.stopLilt();
       setIsProcessRunning(false);
       showNotification(t('messages.processStopped'), 'info');
-    } catch (error) {
+    } catch (_error) {
       showNotification('Failed to stop process', 'error');
     }
   };
@@ -226,7 +234,7 @@ export const App: React.FC = () => {
   const downloadLilt = async () => {
     try {
       await window.electronAPI.openExternal('https://github.com/Ardakilic/lilt/releases/latest');
-    } catch (error) {
+    } catch (_error) {
       showNotification('Failed to open GitHub releases page', 'error');
     }
   };
@@ -259,13 +267,13 @@ export const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Container>
-        <Header 
+        <Header
           onLanguageChange={changeLanguage}
           currentLanguage={settings.language}
           onDownloadLilt={downloadLilt}
           onShowHelp={showHelp}
         />
-        
+
         <MainContent>
           <ScrollableContent>
             <Section>
@@ -287,10 +295,7 @@ export const App: React.FC = () => {
             </Section>
 
             <Section>
-              <OptionsSection
-                settings={settings}
-                onUpdateSetting={updateSetting}
-              />
+              <OptionsSection settings={settings} onUpdateSetting={updateSetting} />
             </Section>
 
             <Section>
@@ -312,11 +317,8 @@ export const App: React.FC = () => {
             onClose={() => setNotification(null)}
           />
         )}
-        
-        <HelpDialog
-          isOpen={isHelpDialogOpen}
-          onClose={closeHelp}
-        />
+
+        <HelpDialog isOpen={isHelpDialogOpen} onClose={closeHelp} />
       </Container>
     </ThemeProvider>
   );

@@ -1,15 +1,11 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import type React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Notification } from '../Notification';
 import { theme } from '../../styles/theme';
+import { Notification } from '../Notification';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider theme={theme}>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
 describe('Notification Component', () => {
@@ -59,10 +55,10 @@ describe('Notification Component', () => {
   it('calls onClose when close button is clicked', async () => {
     const onClose = jest.fn();
     renderWithTheme(<Notification {...defaultProps} onClose={onClose} />);
-    
+
     const closeButton = screen.getByRole('button');
     fireEvent.click(closeButton);
-    
+
     // The close handler uses setTimeout, so we need to wait for it
     await waitFor(() => {
       expect(onClose).toHaveBeenCalledTimes(1);
@@ -72,33 +68,26 @@ describe('Notification Component', () => {
   it('auto-closes after specified duration', async () => {
     const onClose = jest.fn();
     renderWithTheme(
-      <Notification 
-        {...defaultProps} 
-        onClose={onClose} 
-        autoClose={true} 
-        duration={100}
-      />
+      <Notification {...defaultProps} onClose={onClose} autoClose={true} duration={100} />
     );
-    
-    await waitFor(() => {
-      expect(onClose).toHaveBeenCalled();
-    }, { timeout: 500 });
+
+    await waitFor(
+      () => {
+        expect(onClose).toHaveBeenCalled();
+      },
+      { timeout: 500 }
+    );
   });
 
   it('does not auto-close when autoClose is false', async () => {
     const onClose = jest.fn();
     renderWithTheme(
-      <Notification 
-        {...defaultProps} 
-        onClose={onClose} 
-        autoClose={false}
-        duration={100}
-      />
+      <Notification {...defaultProps} onClose={onClose} autoClose={false} duration={100} />
     );
-    
+
     // Wait for longer than duration
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
     expect(onClose).not.toHaveBeenCalled();
   });
 });

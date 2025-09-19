@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
@@ -15,19 +16,21 @@ const TooltipContainer = styled.div`
 
 const TooltipContent = styled.div<TooltipContentProps>`
   position: absolute;
-  background: ${props => props.theme.colors.gray800};
+  background: ${(props) => props.theme.colors.gray800};
   color: white;
   padding: 8px 12px;
-  border-radius: ${props => props.theme.borderRadius.md};
-  font-size: ${props => props.theme.fontSize.sm};
+  border-radius: ${(props) => props.theme.borderRadius.md};
+  font-size: ${(props) => props.theme.fontSize.sm};
   white-space: nowrap;
-  z-index: ${props => props.theme.zIndex.tooltip};
-  opacity: ${props => props.$visible ? 1 : 0};
+  z-index: ${(props) => props.theme.zIndex.tooltip};
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
   pointer-events: none;
   transition: opacity 0.2s ease-in-out;
-  box-shadow: ${props => props.theme.shadows.lg};
+  box-shadow: ${(props) => props.theme.shadows.lg};
   
-  ${props => props.position === 'top' && css`
+  ${(props) =>
+    props.position === 'top' &&
+    css`
     bottom: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
@@ -43,7 +46,9 @@ const TooltipContent = styled.div<TooltipContentProps>`
     }
   `}
   
-  ${props => props.position === 'bottom' && css`
+  ${(props) =>
+    props.position === 'bottom' &&
+    css`
     top: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
@@ -59,7 +64,9 @@ const TooltipContent = styled.div<TooltipContentProps>`
     }
   `}
   
-  ${props => props.position === 'left' && css`
+  ${(props) =>
+    props.position === 'left' &&
+    css`
     right: calc(100% + 5px);
     top: 50%;
     transform: translateY(-50%);
@@ -75,7 +82,9 @@ const TooltipContent = styled.div<TooltipContentProps>`
     }
   `}
   
-  ${props => props.position === 'right' && css`
+  ${(props) =>
+    props.position === 'right' &&
+    css`
     left: calc(100% + 5px);
     top: 50%;
     transform: translateY(-50%);
@@ -98,11 +107,7 @@ interface TooltipProps {
   children: React.ReactNode;
 }
 
-export const Tooltip: React.FC<TooltipProps> = ({
-  content,
-  position = 'top',
-  children,
-}) => {
+export const Tooltip: React.FC<TooltipProps> = ({ content, position = 'top', children }) => {
   const [visible, setVisible] = useState(false);
   const [actualPosition, setActualPosition] = useState<TooltipPosition>(position);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -123,7 +128,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
     // Check if tooltip goes outside viewport and adjust position
     if (position === 'top' && containerRect.top - tooltipRect.height < 0) {
       newPosition = 'bottom';
-    } else if (position === 'bottom' && containerRect.bottom + tooltipRect.height > viewportHeight) {
+    } else if (
+      position === 'bottom' &&
+      containerRect.bottom + tooltipRect.height > viewportHeight
+    ) {
       newPosition = 'top';
     } else if (position === 'left' && containerRect.left - tooltipRect.width < 0) {
       newPosition = 'right';
@@ -141,11 +149,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       onMouseLeave={() => setVisible(false)}
     >
       {children}
-      <TooltipContent
-        ref={contentRef}
-        position={actualPosition}
-        $visible={visible}
-      >
+      <TooltipContent ref={contentRef} position={actualPosition} $visible={visible}>
         {content}
       </TooltipContent>
     </TooltipContainer>

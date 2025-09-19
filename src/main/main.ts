@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
-import { join } from 'path';
+import { type ChildProcess, exec, spawn } from 'node:child_process';
+import { access, constants } from 'node:fs';
+import { join } from 'node:path';
+import { promisify } from 'node:util';
+import type { AppSettings, BinaryInfo, LiltConfig, ProcessStatus } from '@shared/types';
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron';
 import Store from 'electron-store';
-import { AppSettings, LiltConfig, ProcessStatus, BinaryInfo } from '@shared/types';
-import { exec, spawn, ChildProcess } from 'child_process';
-import { promisify } from 'util';
-import { access, constants } from 'fs';
 
 const execAsync = promisify(exec);
 const accessAsync = promisify(access);
@@ -17,8 +17,6 @@ interface TypedStore<T> {
   get<K extends keyof T>(key: K): T[K];
   get(): T;
 }
-
-
 
 class LiltGUI {
   private mainWindow: BrowserWindow | null = null;
@@ -41,8 +39,8 @@ class LiltGUI {
         ffmpegBinaryPath: '',
         ffprobeBinaryPath: '',
         language: 'en',
-        lastUsedPaths: {}
-      }
+        lastUsedPaths: {},
+      },
     });
 
     this.setupElectronEvents();
@@ -109,7 +107,7 @@ class LiltGUI {
     ipcMain.handle('save-settings', (_event, settings: Partial<AppSettings>) => {
       // Update multiple properties using the set method with an object
       (this.store as unknown as TypedStore<AppSettings>).set(settings);
-      
+
       // Return all current settings
       return (this.store as unknown as TypedStore<AppSettings>).store;
     });
@@ -117,22 +115,22 @@ class LiltGUI {
     // File/folder selection
     ipcMain.handle('select-folder', async () => {
       if (!this.mainWindow) return null;
-      
+
       const result = await dialog.showOpenDialog(this.mainWindow, {
-        properties: ['openDirectory']
+        properties: ['openDirectory'],
       });
-      
+
       return result.canceled ? null : result.filePaths[0];
     });
 
     ipcMain.handle('select-file', async (_event, filters?: Electron.FileFilter[]) => {
       if (!this.mainWindow) return null;
-      
+
       const result = await dialog.showOpenDialog(this.mainWindow, {
         properties: ['openFile'],
-        filters: filters || [{ name: 'All Files', extensions: ['*'] }]
+        filters: filters || [{ name: 'All Files', extensions: ['*'] }],
       });
-      
+
       return result.canceled ? null : result.filePaths[0];
     });
 
@@ -171,7 +169,7 @@ class LiltGUI {
     ipcMain.handle('get-platform-info', () => {
       return {
         platform: process.platform,
-        arch: process.arch
+        arch: process.arch,
       };
     });
   }
@@ -181,14 +179,14 @@ class LiltGUI {
       const command = process.platform === 'win32' ? 'where' : 'which';
       const { stdout } = await execAsync(`${command} ${binaryName}`);
       const path = stdout.trim().split('\n')[0];
-      
+
       if (path) {
         const info = await this.checkBinary(path);
         return {
           name: binaryName,
           path,
           version: info.version,
-          isAvailable: true
+          isAvailable: true,
         };
       }
     } catch (error) {
@@ -198,14 +196,14 @@ class LiltGUI {
     return {
       name: binaryName,
       path: '',
-      isAvailable: false
+      isAvailable: false,
     };
   }
 
   private async checkBinary(binaryPath: string): Promise<{ isValid: boolean; version?: string }> {
     try {
       await accessAsync(binaryPath, constants.F_OK | constants.X_OK);
-      
+
       // Try to get version
       try {
         const { stdout } = await execAsync(`"${binaryPath}" --version`);
@@ -220,22 +218,24 @@ class LiltGUI {
     }
   }
 
-  private async startLiltProcess(config: LiltConfig): Promise<{ success: boolean; error?: string }> {
+  private async startLiltProcess(
+    config: LiltConfig
+  ): Promise<{ success: boolean; error?: string }> {
     if (this.liltProcess) {
       return { success: false, error: 'A process is already running' };
     }
 
     try {
       const args = this.buildLiltArgs(config);
-      
+
       this.liltProcess = spawn(config.liltBinaryPath, args, {
-        stdio: ['pipe', 'pipe', 'pipe']
+        stdio: ['pipe', 'pipe', 'pipe'],
       });
 
       this.processStatus = {
         isRunning: true,
         pid: this.liltProcess.pid,
-        output: []
+        output: [],
       };
 
       // Handle process output
@@ -255,7 +255,7 @@ class LiltGUI {
         this.processStatus.isRunning = false;
         this.processStatus.pid = undefined;
         this.liltProcess = null;
-        
+
         const message = `Process exited with code ${code}`;
         this.processStatus.output.push(message);
         this.mainWindow?.webContents.send('lilt-finished', { code, message });
@@ -265,7 +265,7 @@ class LiltGUI {
         this.processStatus.isRunning = false;
         this.processStatus.pid = undefined;
         this.liltProcess = null;
-        
+
         const message = `Process error: ${error.message}`;
         this.processStatus.output.push(message);
         this.mainWindow?.webContents.send('lilt-error', { error: error.message });
@@ -273,9 +273,9 @@ class LiltGUI {
 
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Unknown error' 
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
       };
     }
   }
@@ -320,7 +320,7 @@ class LiltGUI {
   private killLiltProcess() {
     if (this.liltProcess && this.processStatus.isRunning) {
       this.liltProcess.kill('SIGTERM');
-      
+
       // Force kill after 5 seconds if process doesn't respond
       setTimeout(() => {
         if (this.liltProcess && this.processStatus.isRunning) {
@@ -328,53 +328,6 @@ class LiltGUI {
         }
       }, 5000);
     }
-  }
-
-  private getPlatformInfo(): { os: string; arch: string; ext: string } | null {
-    const platform = process.platform;
-    const arch = process.arch;
-
-    let os: string;
-    let archName: string;
-    let ext: string;
-
-    // Map platform
-    switch (platform) {
-      case 'darwin':
-        os = 'darwin';
-        ext = '';
-        break;
-      case 'linux':
-        os = 'linux';
-        ext = '';
-        break;
-      case 'win32':
-        os = 'windows';
-        ext = '.exe';
-        break;
-      default:
-        return null;
-    }
-
-    // Map architecture
-    switch (arch) {
-      case 'x64':
-        archName = 'amd64';
-        break;
-      case 'arm64':
-        archName = 'arm64';
-        break;
-      case 'ia32':
-        archName = '386';
-        break;
-      case 'arm':
-        archName = 'arm';
-        break;
-      default:
-        return null;
-    }
-
-    return { os, arch: archName, ext };
   }
 }
 

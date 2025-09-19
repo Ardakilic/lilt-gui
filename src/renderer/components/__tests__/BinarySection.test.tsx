@@ -1,10 +1,10 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import type React from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { BinarySection } from '../BinarySection';
-import { theme } from '../../styles/theme';
+import { ThemeProvider } from 'styled-components';
 import i18n from '../../i18n/i18n';
+import { theme } from '../../styles/theme';
+import { BinarySection } from '../BinarySection';
 
 const mockElectronAPI = {
   selectFile: jest.fn(),
@@ -19,9 +19,7 @@ Object.defineProperty(window, 'electronAPI', {
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <I18nextProvider i18n={i18n}>
-      <ThemeProvider theme={theme}>
-        {component}
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{component}</ThemeProvider>
     </I18nextProvider>
   );
 };
@@ -60,7 +58,7 @@ describe('BinarySection Component', () => {
 
   it('renders all binary path inputs', () => {
     renderWithProviders(<BinarySection {...defaultProps} />);
-    
+
     const inputs = screen.getAllByDisplayValue('');
     expect(inputs).toHaveLength(4); // Should have 4 binary inputs
     expect(screen.getByText('Binary Configuration')).toBeInTheDocument();
@@ -73,74 +71,80 @@ describe('BinarySection Component', () => {
   it('disables Sox/FFmpeg inputs when useDocker is true', () => {
     const props = {
       ...defaultProps,
-      settings: { ...defaultProps.settings, useDocker: true }
+      settings: { ...defaultProps.settings, useDocker: true },
     };
     renderWithProviders(<BinarySection {...props} />);
-    
+
     const inputs = screen.getAllByDisplayValue('');
     // First input is Lilt (enabled), others should be disabled
     expect(inputs[0]).not.toBeDisabled();
     expect(inputs[1]).toBeDisabled(); // Sox
-    expect(inputs[2]).toBeDisabled(); // FFmpeg  
+    expect(inputs[2]).toBeDisabled(); // FFmpeg
     expect(inputs[3]).toBeDisabled(); // FFprobe
   });
 
   it('enables all inputs when useDocker is false', () => {
     const props = {
       ...defaultProps,
-      settings: { ...defaultProps.settings, useDocker: false }
+      settings: { ...defaultProps.settings, useDocker: false },
     };
     renderWithProviders(<BinarySection {...props} />);
-    
+
     const inputs = screen.getAllByDisplayValue('');
-    inputs.forEach(input => {
+    for (const input of inputs) {
       expect(input).not.toBeDisabled();
-    });
+    }
   });
 
   it('handles file selection for Lilt binary', async () => {
     mockElectronAPI.selectFile.mockResolvedValue('/path/to/lilt');
-    
+
     renderWithProviders(<BinarySection {...defaultProps} />);
-    
+
     const browseButtons = screen.getAllByText('Browse');
     fireEvent.click(browseButtons[0]); // First browse button (Lilt)
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.selectFile).toHaveBeenCalledWith([
         { name: 'Executable Files', extensions: ['exe', ''] },
-        { name: 'All Files', extensions: ['*'] }
+        { name: 'All Files', extensions: ['*'] },
       ]);
       expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith('liltBinaryPath', '/path/to/lilt');
     });
   });
 
   it('handles binary identification for Lilt', async () => {
-    mockElectronAPI.identifyBinary.mockResolvedValue({ isAvailable: true, path: '/usr/local/bin/lilt' });
-    
+    mockElectronAPI.identifyBinary.mockResolvedValue({
+      isAvailable: true,
+      path: '/usr/local/bin/lilt',
+    });
+
     renderWithProviders(<BinarySection {...defaultProps} />);
-    
+
     const identifyButtons = screen.getAllByText('Identify');
     fireEvent.click(identifyButtons[0]); // First identify button (Lilt)
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.identifyBinary).toHaveBeenCalledWith('lilt');
-      expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith('liltBinaryPath', '/usr/local/bin/lilt');
+      expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith(
+        'liltBinaryPath',
+        '/usr/local/bin/lilt'
+      );
     });
   });
 
   it('handles Sox binary selection when Docker is disabled', async () => {
     mockElectronAPI.selectFile.mockResolvedValue('/path/to/sox');
-    
+
     const props = {
       ...defaultProps,
-      settings: { ...defaultProps.settings, useDocker: false }
+      settings: { ...defaultProps.settings, useDocker: false },
     };
     renderWithProviders(<BinarySection {...props} />);
-    
+
     const browseButtons = screen.getAllByText('Browse');
     fireEvent.click(browseButtons[1]); // Second browse button (Sox)
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.selectFile).toHaveBeenCalled();
       expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith('soxBinaryPath', '/path/to/sox');
@@ -148,31 +152,37 @@ describe('BinarySection Component', () => {
   });
 
   it('handles FFmpeg binary identification when Docker is disabled', async () => {
-    mockElectronAPI.identifyBinary.mockResolvedValue({ isAvailable: true, path: '/usr/local/bin/ffmpeg' });
-    
+    mockElectronAPI.identifyBinary.mockResolvedValue({
+      isAvailable: true,
+      path: '/usr/local/bin/ffmpeg',
+    });
+
     const props = {
       ...defaultProps,
-      settings: { ...defaultProps.settings, useDocker: false }
+      settings: { ...defaultProps.settings, useDocker: false },
     };
     renderWithProviders(<BinarySection {...props} />);
-    
+
     const identifyButtons = screen.getAllByText('Identify');
     fireEvent.click(identifyButtons[2]); // Third identify button (FFmpeg)
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.identifyBinary).toHaveBeenCalledWith('ffmpeg');
-      expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith('ffmpegBinaryPath', '/usr/local/bin/ffmpeg');
+      expect(defaultProps.onUpdateSetting).toHaveBeenCalledWith(
+        'ffmpegBinaryPath',
+        '/usr/local/bin/ffmpeg'
+      );
     });
   });
 
   it('handles errors during file selection', async () => {
     mockElectronAPI.selectFile.mockRejectedValue(new Error('Selection cancelled'));
-    
+
     renderWithProviders(<BinarySection {...defaultProps} />);
-    
+
     const browseButtons = screen.getAllByText('Browse');
     fireEvent.click(browseButtons[0]);
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.selectFile).toHaveBeenCalled();
       // Should not call onChange on error
@@ -182,12 +192,12 @@ describe('BinarySection Component', () => {
 
   it('handles errors during binary identification', async () => {
     mockElectronAPI.identifyBinary.mockRejectedValue(new Error('Binary not found'));
-    
+
     renderWithProviders(<BinarySection {...defaultProps} />);
-    
+
     const identifyButtons = screen.getAllByText('Identify');
     fireEvent.click(identifyButtons[0]);
-    
+
     await waitFor(() => {
       expect(mockElectronAPI.identifyBinary).toHaveBeenCalled();
       // Should not call onChange on error
@@ -207,9 +217,9 @@ describe('BinarySection Component', () => {
         useDocker: false,
       },
     };
-    
+
     renderWithProviders(<BinarySection {...props} />);
-    
+
     expect(screen.getByDisplayValue('/path/to/lilt')).toBeInTheDocument();
     expect(screen.getByDisplayValue('/path/to/sox')).toBeInTheDocument();
     expect(screen.getByDisplayValue('/path/to/ffmpeg')).toBeInTheDocument();

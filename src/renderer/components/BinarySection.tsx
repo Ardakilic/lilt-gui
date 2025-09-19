@@ -1,16 +1,16 @@
-import React from 'react';
+import type { AppSettings } from '@shared/types';
+import type React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { AppSettings } from '@shared/types';
 import { Button } from './common/Button';
 import { Input } from './common/Input';
 import { Tooltip } from './common/Tooltip';
 
 const SectionTitle = styled.h3`
   margin: 0 0 20px 0;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.lg};
-  font-weight: ${props => props.theme.fontWeight.semibold};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.lg};
+  font-weight: ${(props) => props.theme.fontWeight.semibold};
 `;
 
 const BinaryGroup = styled.div`
@@ -20,9 +20,9 @@ const BinaryGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.md};
-  font-weight: ${props => props.theme.fontWeight.medium};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.md};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
 `;
 
 const InputGroup = styled.div`
@@ -44,8 +44,8 @@ const IdentifyButton = styled(Button)`
 `;
 
 const DisabledGroup = styled.div<{ disabled: boolean }>`
-  opacity: ${props => props.disabled ? 0.5 : 1};
-  pointer-events: ${props => props.disabled ? 'none' : 'auto'};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
   transition: opacity 0.2s ease-in-out;
 `;
 
@@ -67,10 +67,13 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
   const handleBrowse = async (binaryType: keyof AppSettings) => {
     try {
       const filters = [
-        { name: 'Executable Files', extensions: process.platform === 'win32' ? ['exe'] : ['exe', ''] },
-        { name: 'All Files', extensions: ['*'] }
+        {
+          name: 'Executable Files',
+          extensions: process.platform === 'win32' ? ['exe'] : ['exe', ''],
+        },
+        { name: 'All Files', extensions: ['*'] },
       ];
-      
+
       const result = await window.electronAPI.selectFile(filters);
       if (result) {
         onUpdateSetting(binaryType, result);
@@ -132,7 +135,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
   return (
     <div>
       <SectionTitle>{t('sections.binaryConfiguration')}</SectionTitle>
-      
+
       {binaryConfigs.map((config) => (
         <BinaryGroup key={config.key}>
           <DisabledGroup disabled={config.key !== 'liltBinaryPath' && settings.useDocker}>
@@ -142,7 +145,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
                 {config.required && ' *'}
               </Label>
             </Tooltip>
-            
+
             <InputGroup>
               <BinaryInput
                 type="text"
@@ -151,7 +154,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
                 placeholder={t('placeholders.selectBinary')}
                 disabled={config.key !== 'liltBinaryPath' && settings.useDocker}
               />
-              
+
               <BinaryButton
                 variant="secondary"
                 onClick={() => handleBrowse(config.key)}
@@ -159,7 +162,7 @@ export const BinarySection: React.FC<BinarySectionProps> = ({
               >
                 {t('buttons.browse')}
               </BinaryButton>
-              
+
               <IdentifyButton
                 variant="ghost"
                 onClick={() => handleIdentify(config.binaryName, config.key)}

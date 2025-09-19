@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { App } from './App';
 
@@ -16,7 +15,7 @@ const mockSettings = {
   ffmpegBinaryPath: '',
   ffprobeBinaryPath: '',
   language: 'en',
-  lastUsedPaths: {}
+  lastUsedPaths: {},
 };
 
 const mockElectronAPI = {
@@ -76,11 +75,11 @@ describe('App Component', () => {
 
   it('loads and displays the main interface', async () => {
     render(<App />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('app.title')).toBeInTheDocument();
     });
-    
+
     // Check if main sections are rendered (showing translation keys in test environment)
     expect(screen.getByText('sections.binaryConfiguration')).toBeInTheDocument();
     expect(screen.getByText('sections.folderConfiguration')).toBeInTheDocument();
@@ -90,20 +89,20 @@ describe('App Component', () => {
 
   it('handles settings loading error gracefully', async () => {
     mockElectronAPI.getSettings.mockRejectedValueOnce(new Error('Settings error'));
-    
+
     render(<App />);
-    
+
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
     });
-    
+
     // App should still render even if settings fail to load
     expect(mockElectronAPI.getSettings).toHaveBeenCalled();
   });
 
   it('sets up event listeners on mount', () => {
     render(<App />);
-    
+
     expect(mockElectronAPI.onLiltOutput).toHaveBeenCalled();
     expect(mockElectronAPI.onLiltFinished).toHaveBeenCalled();
     expect(mockElectronAPI.onLiltError).toHaveBeenCalled();
@@ -111,9 +110,9 @@ describe('App Component', () => {
 
   it('cleans up event listeners on unmount', () => {
     const { unmount } = render(<App />);
-    
+
     unmount();
-    
+
     expect(mockElectronAPI.removeAllListeners).toHaveBeenCalledWith('lilt-output');
     expect(mockElectronAPI.removeAllListeners).toHaveBeenCalledWith('lilt-finished');
     expect(mockElectronAPI.removeAllListeners).toHaveBeenCalledWith('lilt-error');

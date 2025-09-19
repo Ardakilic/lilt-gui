@@ -1,15 +1,11 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Button } from '../common/Button';
 import { theme } from '../../styles/theme';
+import { Button } from '../common/Button';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider theme={theme}>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
 describe('Button Component', () => {
@@ -22,27 +18,31 @@ describe('Button Component', () => {
   it('handles click events', () => {
     const handleClick = jest.fn();
     renderWithTheme(<Button onClick={handleClick}>Click me</Button>);
-    
+
     const button = screen.getByRole('button', { name: /click me/i });
     fireEvent.click(button);
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
   it('can be disabled', () => {
     const handleClick = jest.fn();
-    renderWithTheme(<Button disabled onClick={handleClick}>Click me</Button>);
-    
+    renderWithTheme(
+      <Button disabled onClick={handleClick}>
+        Click me
+      </Button>
+    );
+
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeDisabled();
-    
+
     fireEvent.click(button);
     expect(handleClick).not.toHaveBeenCalled();
   });
 
   it('shows loading state', () => {
     renderWithTheme(<Button loading>Click me</Button>);
-    
+
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeDisabled();
     expect(button).toHaveTextContent('⟳');

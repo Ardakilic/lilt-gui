@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes } from 'react';
+import type React from 'react';
+import type { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 const CheckboxContainer = styled.label`
@@ -9,7 +10,7 @@ const CheckboxContainer = styled.label`
   user-select: none;
   
   &:hover input:not(:disabled) + span {
-    border-color: ${props => props.theme.colors.primary};
+    border-color: ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -28,12 +29,14 @@ const StyledCheckbox = styled.span<{ checked: boolean; disabled?: boolean }>`
   justify-content: center;
   width: 20px;
   height: 20px;
-  border: 2px solid ${props => props.checked ? props.theme.colors.primary : props.theme.colors.border};
-  border-radius: ${props => props.theme.borderRadius.sm};
-  background: ${props => props.checked ? props.theme.colors.primary : props.theme.colors.background};
-  transition: ${props => props.theme.transitions.default};
+  border: 2px solid ${(props) => (props.checked ? props.theme.colors.primary : props.theme.colors.border)};
+  border-radius: ${(props) => props.theme.borderRadius.sm};
+  background: ${(props) => (props.checked ? props.theme.colors.primary : props.theme.colors.background)};
+  transition: ${(props) => props.theme.transitions.default};
   
-  ${props => props.disabled && `
+  ${(props) =>
+    props.disabled &&
+    `
     opacity: 0.5;
     cursor: not-allowed;
   `}
@@ -41,7 +44,7 @@ const StyledCheckbox = styled.span<{ checked: boolean; disabled?: boolean }>`
   &::after {
     content: '';
     position: absolute;
-    display: ${props => props.checked ? 'block' : 'none'};
+    display: ${(props) => (props.checked ? 'block' : 'none')};
     left: 6px;
     top: 2px;
     width: 6px;
@@ -53,8 +56,8 @@ const StyledCheckbox = styled.span<{ checked: boolean; disabled?: boolean }>`
 `;
 
 const Label = styled.span<{ disabled?: boolean }>`
-  font-size: ${props => props.theme.fontSize.md};
-  color: ${props => props.disabled ? props.theme.colors.textLight : props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.md};
+  color: ${(props) => (props.disabled ? props.theme.colors.textLight : props.theme.colors.text)};
 `;
 
 interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
@@ -70,12 +73,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <CheckboxContainer>
-      <HiddenCheckbox
-        checked={checked}
-        disabled={disabled}
-        onChange={onChange}
-        {...props}
-      />
+      <HiddenCheckbox checked={checked} disabled={disabled} onChange={onChange} {...props} />
       <StyledCheckbox checked={checked} disabled={disabled} />
       {label && <Label disabled={disabled}>{label}</Label>}
     </CheckboxContainer>

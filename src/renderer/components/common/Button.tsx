@@ -1,4 +1,5 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import type React from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 type ButtonVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'ghost';
@@ -12,46 +13,46 @@ interface StyledButtonProps {
 
 const buttonVariants = {
   primary: css`
-    background: ${props => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.primary};
     color: white;
-    border: 1px solid ${props => props.theme.colors.primary};
+    border: 1px solid ${(props) => props.theme.colors.primary};
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme.colors.primaryDark};
-      border-color: ${props => props.theme.colors.primaryDark};
+      background: ${(props) => props.theme.colors.primaryDark};
+      border-color: ${(props) => props.theme.colors.primaryDark};
     }
   `,
   secondary: css`
-    background: ${props => props.theme.colors.gray100};
-    color: ${props => props.theme.colors.text};
-    border: 1px solid ${props => props.theme.colors.border};
+    background: ${(props) => props.theme.colors.gray100};
+    color: ${(props) => props.theme.colors.text};
+    border: 1px solid ${(props) => props.theme.colors.border};
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme.colors.gray200};
+      background: ${(props) => props.theme.colors.gray200};
     }
   `,
   success: css`
-    background: ${props => props.theme.colors.success};
+    background: ${(props) => props.theme.colors.success};
     color: white;
-    border: 1px solid ${props => props.theme.colors.success};
+    border: 1px solid ${(props) => props.theme.colors.success};
     
     &:hover:not(:disabled) {
       background: #059669;
     }
   `,
   warning: css`
-    background: ${props => props.theme.colors.warning};
+    background: ${(props) => props.theme.colors.warning};
     color: white;
-    border: 1px solid ${props => props.theme.colors.warning};
+    border: 1px solid ${(props) => props.theme.colors.warning};
     
     &:hover:not(:disabled) {
       background: #d97706;
     }
   `,
   error: css`
-    background: ${props => props.theme.colors.error};
+    background: ${(props) => props.theme.colors.error};
     color: white;
-    border: 1px solid ${props => props.theme.colors.error};
+    border: 1px solid ${(props) => props.theme.colors.error};
     
     &:hover:not(:disabled) {
       background: #dc2626;
@@ -59,11 +60,11 @@ const buttonVariants = {
   `,
   ghost: css`
     background: transparent;
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     border: 1px solid transparent;
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme.colors.gray50};
+      background: ${(props) => props.theme.colors.gray50};
     }
   `,
 };
@@ -71,17 +72,17 @@ const buttonVariants = {
 const buttonSizes = {
   sm: css`
     padding: 6px 12px;
-    font-size: ${props => props.theme.fontSize.sm};
+    font-size: ${(props) => props.theme.fontSize.sm};
     min-height: 32px;
   `,
   md: css`
     padding: 8px 16px;
-    font-size: ${props => props.theme.fontSize.md};
+    font-size: ${(props) => props.theme.fontSize.md};
     min-height: 40px;
   `,
   lg: css`
     padding: 12px 20px;
-    font-size: ${props => props.theme.fontSize.lg};
+    font-size: ${(props) => props.theme.fontSize.lg};
     min-height: 48px;
   `,
 };
@@ -91,18 +92,20 @@ const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-weight: ${props => props.theme.fontWeight.medium};
-  border-radius: ${props => props.theme.borderRadius.md};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
+  border-radius: ${(props) => props.theme.borderRadius.md};
   cursor: pointer;
-  transition: ${props => props.theme.transitions.default};
+  transition: ${(props) => props.theme.transitions.default};
   text-decoration: none;
   outline: none;
   white-space: nowrap;
   
-  ${props => buttonVariants[props.$variant]}
-  ${props => buttonSizes[props.$size]}
+  ${(props) => buttonVariants[props.$variant]}
+  ${(props) => buttonSizes[props.$size]}
   
-  ${props => props.$fullWidth && css`
+  ${(props) =>
+    props.$fullWidth &&
+    css`
     width: 100%;
   `}
   

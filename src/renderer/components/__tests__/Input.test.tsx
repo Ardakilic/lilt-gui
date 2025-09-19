@@ -1,15 +1,11 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Input } from '../common/Input';
 import { theme } from '../../styles/theme';
+import { Input } from '../common/Input';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider theme={theme}>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
 describe('Input Component', () => {
@@ -22,10 +18,10 @@ describe('Input Component', () => {
   it('handles value changes', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
-    
+
     const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: 'test value' } });
-    
+
     expect(handleChange).toHaveBeenCalled();
   });
 

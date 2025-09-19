@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Button } from './common/Button';
@@ -45,12 +46,12 @@ const LanguageSelect = styled(Select)`
   
   select {
     background: rgba(255, 255, 255, 0.9);
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 `;
 
 const DownloadButton = styled(Button)`
-  background: ${props => props.theme.colors.success};
+  background: ${(props) => props.theme.colors.success};
   color: white;
   border: none;
   
@@ -60,7 +61,7 @@ const DownloadButton = styled(Button)`
 `;
 
 const HelpButton = styled(Button)`
-  background: ${props => props.theme.colors.info};
+  background: ${(props) => props.theme.colors.info};
   color: white;
   border: none;
   min-width: 60px;
@@ -112,16 +113,12 @@ export const Header: React.FC<HeaderProps> = ({
         <Title>{t('app.title')}</Title>
         {version && <Version>{t('app.version', { version })}</Version>}
       </LeftSection>
-      
+
       <RightSection>
-        <DownloadButton onClick={onDownloadLilt}>
-          {t('buttons.download')}
-        </DownloadButton>
-        
-        <HelpButton onClick={onShowHelp}>
-          {t('buttons.help')}
-        </HelpButton>
-        
+        <DownloadButton onClick={onDownloadLilt}>{t('buttons.download')}</DownloadButton>
+
+        <HelpButton onClick={onShowHelp}>{t('buttons.help')}</HelpButton>
+
         <LanguageSelect
           value={currentLanguage}
           onChange={(e) => onLanguageChange(e.target.value)}

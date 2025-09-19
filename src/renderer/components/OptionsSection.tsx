@@ -1,17 +1,17 @@
-import React from 'react';
+import type { AppSettings } from '@shared/types';
+import type React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { AppSettings } from '@shared/types';
 import { Checkbox } from './common/Checkbox';
-import { Select } from './common/Select';
 import { Input } from './common/Input';
+import { Select } from './common/Select';
 import { Tooltip } from './common/Tooltip';
 
 const SectionTitle = styled.h3`
   margin: 0 0 20px 0;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.lg};
-  font-weight: ${props => props.theme.fontWeight.semibold};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.lg};
+  font-weight: ${(props) => props.theme.fontWeight.semibold};
 `;
 
 const OptionGroup = styled.div`
@@ -21,15 +21,15 @@ const OptionGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: ${props => props.theme.colors.text};
-  font-size: ${props => props.theme.fontSize.md};
-  font-weight: ${props => props.theme.fontWeight.medium};
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.fontSize.md};
+  font-weight: ${(props) => props.theme.fontWeight.medium};
 `;
 
 const DockerImageGroup = styled.div<{ disabled: boolean }>`
   margin-top: 12px;
-  opacity: ${props => props.disabled ? 0.5 : 1};
-  pointer-events: ${props => props.disabled ? 'none' : 'auto'};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
   transition: opacity 0.2s ease-in-out;
 `;
 
@@ -44,10 +44,7 @@ interface OptionsSectionProps {
   onUpdateSetting: <K extends keyof AppSettings>(key: K, value: AppSettings[K]) => void;
 }
 
-export const OptionsSection: React.FC<OptionsSectionProps> = ({
-  settings,
-  onUpdateSetting,
-}) => {
+export const OptionsSection: React.FC<OptionsSectionProps> = ({ settings, onUpdateSetting }) => {
   const { t } = useTranslation();
 
   const outputFormatOptions = [
@@ -60,7 +57,7 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
   return (
     <div>
       <SectionTitle>{t('sections.conversionOptions')}</SectionTitle>
-      
+
       <OptionGroup>
         <Tooltip content={t('tooltips.useDocker')}>
           <Checkbox
@@ -69,7 +66,7 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
             onChange={(e) => onUpdateSetting('useDocker', e.target.checked)}
           />
         </Tooltip>
-        
+
         <DockerImageGroup disabled={!settings.useDocker}>
           <Tooltip content={t('tooltips.dockerImage')}>
             <Label>{t('labels.dockerImage')}</Label>
@@ -90,7 +87,9 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
         </Tooltip>
         <Select
           value={settings.enforceOutputFormat}
-          onChange={(e) => onUpdateSetting('enforceOutputFormat', e.target.value as 'flac' | 'mp3' | 'alac' | '')}
+          onChange={(e) =>
+            onUpdateSetting('enforceOutputFormat', e.target.value as 'flac' | 'mp3' | 'alac' | '')
+          }
           options={outputFormatOptions}
         />
       </OptionGroup>
@@ -104,7 +103,7 @@ export const OptionsSection: React.FC<OptionsSectionProps> = ({
               onChange={(e) => onUpdateSetting('copyImages', e.target.checked)}
             />
           </Tooltip>
-          
+
           <Tooltip content={t('tooltips.noPreserveMetadata')}>
             <Checkbox
               label={t('labels.noPreserveMetadata')}

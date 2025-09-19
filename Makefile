@@ -1,7 +1,7 @@
 # Lilt GUI Development Makefile
 # This Makefile helps run the development environment using Docker
 
-.PHONY: help install dev build test test-coverage lint typecheck dist shell clean install-local dev-local build-local test-local ci-install ci-test ci-lint ci-typecheck ci-build
+.PHONY: help install dev build test test-coverage lint lint-check format format-check typecheck dist shell clean install-local dev-local build-local test-local ci-install ci-test ci-lint ci-typecheck ci-build
 
 # Default target
 help: ## Show this help message
@@ -16,6 +16,10 @@ help: ## Show this help message
 	@echo "  make install"
 	@echo "  make dev"
 	@echo "  make test"
+	@echo "  make lint-check     # Check code without fixing"
+	@echo "  make lint           # Check and auto-fix code"
+	@echo "  make format-check   # Check formatting without fixing"
+	@echo "  make format         # Check and auto-fix formatting"
 	@echo ""
 	@echo "Distribution builds:"
 	@echo "  - dist-mac/win/linux: Build for current Docker architecture"
@@ -48,9 +52,21 @@ test-coverage: ## Run tests with coverage
 	@echo "Running tests with coverage using Docker..."
 	@docker run --rm -v $$(pwd):/app -w /app node:22-alpine npm run test:coverage
 
-lint: ## Run linter
-	@echo "Running linter using Docker..."
+lint: ## Run linter with auto-fix
+	@echo "Running linter with auto-fix using Docker..."
 	@docker run --rm -v $$(pwd):/app -w /app node:22-alpine npm run lint
+
+lint-check: ## Run linter in check-only mode (no fixes)
+	@echo "Running linter check using Docker..."
+	@docker run --rm -v $$(pwd):/app -w /app node:22-alpine npm run lint:check
+
+format: ## Run formatter with auto-fix
+	@echo "Running formatter with auto-fix using Docker..."
+	@docker run --rm -v $$(pwd):/app -w /app node:22-alpine npm run format
+
+format-check: ## Run formatter in check-only mode (no fixes)
+	@echo "Running formatter check using Docker..."
+	@docker run --rm -v $$(pwd):/app -w /app node:22-alpine npm run format:check
 
 typecheck: ## Run TypeScript type checking
 	@echo "Running TypeScript type checking using Docker..."

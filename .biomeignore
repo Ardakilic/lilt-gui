@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+release/
+coverage/
+
+# Generated files
+*.d.ts
+
+# Config files that may have specific formatting
+package-lock.json
+*.min.js
+*.bundle.js
+
+# Asset files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot

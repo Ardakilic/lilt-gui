@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const spin = keyframes`
@@ -34,9 +34,7 @@ interface LoadingSpinnerProps {
   text?: string;
 }
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
-  text = 'Loading...'
-}) => {
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ text = 'Loading...' }) => {
   return (
     <SpinnerContainer>
       <div>

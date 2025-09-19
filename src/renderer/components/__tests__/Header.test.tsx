@@ -1,10 +1,10 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
+import { fireEvent, render, screen } from '@testing-library/react';
+import type React from 'react';
 import { I18nextProvider } from 'react-i18next';
-import { Header } from '../Header';
-import { theme } from '../../styles/theme';
+import { ThemeProvider } from 'styled-components';
 import i18n from '../../i18n/i18n';
+import { theme } from '../../styles/theme';
+import { Header } from '../Header';
 
 // Mock electron API
 const mockElectronAPI = {
@@ -19,9 +19,7 @@ Object.defineProperty(window, 'electronAPI', {
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <ThemeProvider theme={theme}>
-      <I18nextProvider i18n={i18n}>
-        {component}
-      </I18nextProvider>
+      <I18nextProvider i18n={i18n}>{component}</I18nextProvider>
     </ThemeProvider>
   );
 };
@@ -46,9 +44,9 @@ describe('Header Component', () => {
 
   it('renders title and version', async () => {
     renderWithProviders(<Header {...defaultProps} />);
-    
+
     expect(screen.getByText('Lilt GUI')).toBeInTheDocument();
-    
+
     // Wait for version to load
     await screen.findByText(/Version 1.0.0/);
     expect(screen.getByText(/Version 1.0.0/)).toBeInTheDocument();
@@ -57,36 +55,36 @@ describe('Header Component', () => {
   it('calls onDownloadLilt when download button is clicked', () => {
     const onDownloadLilt = jest.fn();
     renderWithProviders(<Header {...defaultProps} onDownloadLilt={onDownloadLilt} />);
-    
+
     const downloadButton = screen.getByText(/Download Lilt/i);
     fireEvent.click(downloadButton);
-    
+
     expect(onDownloadLilt).toHaveBeenCalledTimes(1);
   });
 
   it('calls onShowHelp when help button is clicked', () => {
     const onShowHelp = jest.fn();
     renderWithProviders(<Header {...defaultProps} onShowHelp={onShowHelp} />);
-    
+
     const helpButton = screen.getByText(/Help/i);
     fireEvent.click(helpButton);
-    
+
     expect(onShowHelp).toHaveBeenCalledTimes(1);
   });
 
   it('calls onLanguageChange when language is changed', () => {
     const onLanguageChange = jest.fn();
     renderWithProviders(<Header {...defaultProps} onLanguageChange={onLanguageChange} />);
-    
+
     const languageSelect = screen.getByRole('combobox');
     fireEvent.change(languageSelect, { target: { value: 'tr' } });
-    
+
     expect(onLanguageChange).toHaveBeenCalledWith('tr');
   });
 
   it('shows current language as selected', () => {
     renderWithProviders(<Header {...defaultProps} currentLanguage="de" />);
-    
+
     const languageSelect = screen.getByRole('combobox') as HTMLSelectElement;
     expect(languageSelect.value).toBe('de');
   });
