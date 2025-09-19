@@ -83,7 +83,7 @@
     "webpack-dev-server": "^5.0.0"
   },
   "dependencies": {
-    "electron-store": "^8.1.0",
+    "electron-store": "^10.0.0",
     "i18next": "^25.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
