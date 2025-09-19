@@ -9,6 +9,17 @@ import { access, constants } from 'fs';
 const execAsync = promisify(exec);
 const accessAsync = promisify(access);
 
+// Type-safe interface for electron-store methods
+interface TypedStore<T> {
+  store: T;
+  set(object: Partial<T>): void;
+  set<K extends keyof T>(key: K, value: T[K]): void;
+  get<K extends keyof T>(key: K): T[K];
+  get(): T;
+}
+
+
+
 class LiltGUI {
   private mainWindow: BrowserWindow | null = null;
   private store: Store<AppSettings>;
@@ -91,12 +102,16 @@ class LiltGUI {
   private setupIpcHandlers() {
     // Settings management
     ipcMain.handle('get-settings', () => {
-      return this.store.store;
+      // Return all settings using the store property
+      return (this.store as unknown as TypedStore<AppSettings>).store;
     });
 
     ipcMain.handle('save-settings', (_event, settings: Partial<AppSettings>) => {
-      this.store.set(settings);
-      return this.store.store;
+      // Update multiple properties using the set method with an object
+      (this.store as unknown as TypedStore<AppSettings>).set(settings);
+      
+      // Return all current settings
+      return (this.store as unknown as TypedStore<AppSettings>).store;
     });
 
     // File/folder selection
