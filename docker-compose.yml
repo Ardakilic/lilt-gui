@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # Frontend development server (Vite)
+  frontend:
+    image: node:20-alpine
+    container_name: lilt-gui-frontend
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "1420:1420"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - lilt-network
+
+  # Tauri development (requires X11 forwarding on Linux/macOS)
+  tauri-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.tauri
+    container_name: lilt-gui-tauri
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ~/.Xauthority:/home/developer/.Xauthority:rw
+      - node_modules:/app/node_modules
+      - cargo_cache:/usr/local/cargo/registry
+      - target_cache:/app/src-tauri/target
+    environment:
+      - DISPLAY=${DISPLAY}
+      - RUST_BACKTRACE=1
+      - CARGO_HOME=/usr/local/cargo
+    network_mode: "host"
+    ipc: host
+    privileged: true
+    command: bash -c "npm install && npm run tauri:dev"
+    depends_on:
+      - frontend
+
+  # Test runner
+  test:
+    image: node:20-alpine
+    container_name: lilt-gui-test
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: sh -c "npm install && npm test"
+    environment:
+      - NODE_ENV=test
+    networks:
+      - lilt-network
+    profiles:
+      - test
+
+  # Linter
+  lint:
+    image: node:20-alpine
+    container_name: lilt-gui-lint
+    working_dir: /app
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: sh -c "npm install && npm run lint"
+    networks:
+      - lilt-network
+    profiles:
+      - lint
+
+volumes:
+  node_modules:
+    driver: local
+  cargo_cache:
+    driver: local
+  target_cache:
+    driver: local
+
+networks:
+  lilt-network:
+    driver: bridge

@@ -1,0 +1,97 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "subtitle": "Audio-Transkodierung leicht gemacht",
+    "version": "Version {{version}}"
+  },
+  "header": {
+    "help": "Hilfe",
+    "language": "Sprache"
+  },
+  "help": {
+    "title": "Über Lilt GUI",
+    "description": "Lilt GUI ist eine moderne grafische Oberfläche für Lilt, ein plattformübergreifendes Audio-Transkodierungstool, das Hi-Res FLAC- und ALAC-Dateien in verschiedene Formate konvertiert.",
+    "whatIsLilt": "Was ist Lilt?",
+    "liltDescription": "Lilt ist ein Kommandozeilen-Tool, das Hi-Res FLAC- und ALAC-Dateien in 16-Bit-FLAC-Dateien mit einer Abtastrate von 44,1 kHz oder 48 kHz konvertiert. Es kann auch Ausgabeformate wie MP3 oder ALAC erzwingen.",
+    "features": "Funktionen",
+    "featuresList": [
+      "Konvertierung von FLAC-, ALAC- und MP3-Dateien",
+      "Unterstützung für mehrere Ausgabeformate (FLAC, MP3, ALAC)",
+      "Metadaten und Cover-Art beibehalten",
+      "Docker-Unterstützung für containerisierte Ausführung",
+      "Plattformübergreifend: Windows, macOS, Linux"
+    ],
+    "author": "Autor",
+    "authorInfo": "Erstellt von Arda Kilicdagi",
+    "visitGithub": "GitHub-Repository besuchen",
+    "close": "Schließen"
+  },
+  "binaries": {
+    "title": "Binärdatei-Konfiguration",
+    "liltPath": "Lilt-Binärdatei",
+    "liltPathTooltip": "Pfad zur ausführbaren Lilt-Binärdatei",
+    "soxPath": "SoX oder SoX_ng-Binärdatei",
+    "soxPathTooltip": "Pfad zur SoX (Sound eXchange) oder SoX_ng-Binärdatei - erforderlich, wenn Docker nicht verwendet wird",
+    "ffmpegPath": "FFmpeg-Binärdatei",
+    "ffmpegPathTooltip": "Pfad zur FFmpeg-Binärdatei - erforderlich für ALAC-Unterstützung und Metadatenerhaltung",
+    "ffprobePath": "FFprobe-Binärdatei",
+    "ffprobePathTooltip": "Pfad zur FFprobe-Binärdatei - Teil von FFmpeg, erforderlich für Audio-Dateianalyse",
+    "browse": "Durchsuchen",
+    "identify": "Identifizieren",
+    "identifySuccess": "In PATH gefunden: {{path}}",
+    "identifyError": "Nicht in PATH gefunden"
+  },
+  "options": {
+    "title": "Transkodierungsoptionen",
+    "useDocker": "Docker verwenden",
+    "useDockerTooltip": "Docker-Container für Sox/FFmpeg anstelle der lokalen Installation verwenden. Empfohlen, wenn Sie diese Tools nicht installiert haben.",
+    "enforceOutputFormat": "Ausgabeformat erzwingen",
+    "enforceOutputFormatTooltip": "Alle Audiodateien in dieses Format konvertieren",
+    "formats": {
+      "default": "Standard (Intelligent)",
+      "flac": "FLAC",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC"
+    },
+    "noPreserveMetadata": "Metadaten nicht beibehalten",
+    "noPreserveMetadataTooltip": "ID3-Tags und Cover-Art aus Originaldateien nicht kopieren",
+    "copyImages": "Bilder kopieren",
+    "copyImagesTooltip": "JPG- und PNG-Bilddateien vom Quell- in das Zielverzeichnis kopieren"
+  },
+  "folders": {
+    "title": "Ordner",
+    "sourceDir": "Quellordner",
+    "sourceDirTooltip": "Verzeichnis mit zu transkodierenden Audiodateien",
+    "targetDir": "Zielordner",
+    "targetDirTooltip": "Verzeichnis, in dem transkodierte Dateien gespeichert werden",
+    "required": "Erforderlich"
+  },
+  "actions": {
+    "startTranscoding": "Transkodierung starten",
+    "stopTranscoding": "Transkodierung stoppen",
+    "downloadLilt": "Lilt herunterladen"
+  },
+  "output": {
+    "title": "Ausgabe",
+    "clear": "Löschen",
+    "waiting": "Warten auf Start...",
+    "running": "Transkodierung läuft...",
+    "completed": "Transkodierung abgeschlossen!",
+    "stopped": "Transkodierung gestoppt.",
+    "error": "Fehler: {{message}}"
+  },
+  "validation": {
+    "liltPathRequired": "Lilt-Binärdateipfad ist erforderlich",
+    "soxPathRequired": "SoX-Binärdateipfad ist erforderlich, wenn Docker nicht verwendet wird",
+    "ffmpegPathRequired": "FFmpeg-Binärdateipfad ist erforderlich, wenn Docker nicht verwendet wird",
+    "ffprobePathRequired": "FFprobe-Binärdateipfad ist erforderlich, wenn Docker nicht verwendet wird",
+    "sourceDirRequired": "Quellordner ist erforderlich",
+    "targetDirRequired": "Zielordner ist erforderlich"
+  },
+  "notifications": {
+    "settingsSaved": "Einstellungen erfolgreich gespeichert",
+    "transcodingStarted": "Transkodierung gestartet",
+    "transcodingStopped": "Transkodierung gestoppt",
+    "error": "Fehler: {{message}}"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "subtitle": "Kolay Ses Dönüştürme",
+    "version": "Sürüm {{version}}"
+  },
+  "header": {
+    "help": "Yardım",
+    "language": "Dil"
+  },
+  "help": {
+    "title": "Lilt GUI Hakkında",
+    "description": "Lilt GUI, Hi-Res FLAC ve ALAC dosyalarını çeşitli formatlara dönüştüren çapraz platform ses dönüştürme aracı Lilt için modern bir grafik arayüzüdür.",
+    "whatIsLilt": "Lilt Nedir?",
+    "liltDescription": "Lilt, Hi-Res FLAC ve ALAC dosyalarını 44.1kHz veya 48kHz örnekleme hızında 16-bit FLAC dosyalarına dönüştüren bir komut satırı aracıdır. MP3 veya ALAC gibi çıktı formatlarını da zorlayabilir.",
+    "features": "Özellikler",
+    "featuresList": [
+      "FLAC, ALAC ve MP3 dosyalarını dönüştürme",
+      "Birden fazla çıktı formatı desteği (FLAC, MP3, ALAC)",
+      "Meta verileri ve kapak resmini koruma",
+      "Konteynerli çalışma için Docker desteği",
+      "Çapraz platform: Windows, macOS, Linux"
+    ],
+    "author": "Yazar",
+    "authorInfo": "Arda Kılıçdağı tarafından oluşturuldu",
+    "visitGithub": "GitHub Deposunu Ziyaret Et",
+    "close": "Kapat"
+  },
+  "binaries": {
+    "title": "İkili Dosya Yapılandırması",
+    "liltPath": "Lilt İkili Dosyası",
+    "liltPathTooltip": "Lilt çalıştırılabilir dosyasının yolu",
+    "soxPath": "SoX veya SoX_ng İkili Dosyası",
+    "soxPathTooltip": "SoX (Sound eXchange) veya SoX_ng ikili dosyasının yolu - Docker kullanılmadığında gereklidir",
+    "ffmpegPath": "FFmpeg İkili Dosyası",
+    "ffmpegPathTooltip": "FFmpeg ikili dosyasının yolu - ALAC desteği ve meta veri koruması için gereklidir",
+    "ffprobePath": "FFprobe İkili Dosyası",
+    "ffprobePathTooltip": "FFprobe ikili dosyasının yolu - FFmpeg'in bir parçası, ses dosyası analizi için gereklidir",
+    "browse": "Gözat",
+    "identify": "Tanımla",
+    "identifySuccess": "PATH'te bulundu: {{path}}",
+    "identifyError": "PATH'te bulunamadı"
+  },
+  "options": {
+    "title": "Dönüştürme Seçenekleri",
+    "useDocker": "Docker Kullan",
+    "useDockerTooltip": "Yerel kurulum yerine Sox/FFmpeg için Docker konteyneri kullanın. Bu araçları kurulu değilse önerilir.",
+    "enforceOutputFormat": "Çıktı Formatını Zorla",
+    "enforceOutputFormatTooltip": "Tüm ses dosyalarının bu formata dönüştürülmesini zorunlu kıl",
+    "formats": {
+      "default": "Varsayılan (Akıllı)",
+      "flac": "FLAC",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC"
+    },
+    "noPreserveMetadata": "Meta Verileri Koruma",
+    "noPreserveMetadataTooltip": "Orijinal dosyalardan ID3 etiketlerini ve kapak resmini kopyalamayı atlayın",
+    "copyImages": "Resimleri Kopyala",
+    "copyImagesTooltip": "JPG ve PNG resim dosyalarını kaynak dizinden hedef dizine kopyalayın"
+  },
+  "folders": {
+    "title": "Klasörler",
+    "sourceDir": "Kaynak Klasör",
+    "sourceDirTooltip": "Dönüştürülecek ses dosyalarını içeren dizin",
+    "targetDir": "Hedef Klasör",
+    "targetDirTooltip": "Dönüştürülen dosyaların kaydedileceği dizin",
+    "required": "Gerekli"
+  },
+  "actions": {
+    "startTranscoding": "Dönüştürmeyi Başlat",
+    "stopTranscoding": "Dönüştürmeyi Durdur",
+    "downloadLilt": "Lilt İndir"
+  },
+  "output": {
+    "title": "Çıktı",
+    "clear": "Temizle",
+    "waiting": "Başlamak için bekleniyor...",
+    "running": "Dönüştürme devam ediyor...",
+    "completed": "Dönüştürme tamamlandı!",
+    "stopped": "Dönüştürme durduruldu.",
+    "error": "Hata: {{message}}"
+  },
+  "validation": {
+    "liltPathRequired": "Lilt ikili dosya yolu gereklidir",
+    "soxPathRequired": "Docker kullanılmadığında SoX ikili dosya yolu gereklidir",
+    "ffmpegPathRequired": "Docker kullanılmadığında FFmpeg ikili dosya yolu gereklidir",
+    "ffprobePathRequired": "Docker kullanılmadığında FFprobe ikili dosya yolu gereklidir",
+    "sourceDirRequired": "Kaynak klasör gereklidir",
+    "targetDirRequired": "Hedef klasör gereklidir"
+  },
+  "notifications": {
+    "settingsSaved": "Ayarlar başarıyla kaydedildi",
+    "transcodingStarted": "Dönüştürme başlatıldı",
+    "transcodingStopped": "Dönüştürme durduruldu",
+    "error": "Hata: {{message}}"
+  }
+}

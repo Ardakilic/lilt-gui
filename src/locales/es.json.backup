@@ -1,0 +1,97 @@
+{
+  "app": {
+    "title": "Lilt GUI",
+    "subtitle": "Audio Transcoding Made Easy",
+    "version": "Version {{version}}"
+  },
+  "header": {
+    "help": "Help",
+    "language": "Language"
+  },
+  "help": {
+    "title": "About Lilt GUI",
+    "description": "Lilt GUI is a modern graphical interface for Lilt, a cross-platform audio transcoding tool that converts Hi-Res FLAC and ALAC files to various formats.",
+    "whatIsLilt": "What is Lilt?",
+    "liltDescription": "Lilt is a command-line tool that converts Hi-Res FLAC and ALAC files to 16-bit FLAC files with a sample rate of 44.1kHz or 48kHz. It can also enforce output formats like MP3 or ALAC.",
+    "features": "Features",
+    "featuresList": [
+      "Convert FLAC, ALAC, and MP3 files",
+      "Support for multiple output formats (FLAC, MP3, ALAC)",
+      "Preserve metadata and cover art",
+      "Docker support for containerized execution",
+      "Cross-platform: Windows, macOS, Linux"
+    ],
+    "author": "Author",
+    "authorInfo": "Created by Arda Kilicdagi",
+    "visitGithub": "Visit GitHub Repository",
+    "close": "Close"
+  },
+  "binaries": {
+    "title": "Binary Configuration",
+    "liltPath": "Lilt Binary",
+    "liltPathTooltip": "Path to the lilt executable binary",
+    "soxPath": "SoX or SoX_ng Binary",
+    "soxPathTooltip": "Path to the SoX (Sound eXchange) or SoX_ng binary - required when not using Docker",
+    "ffmpegPath": "FFmpeg Binary",
+    "ffmpegPathTooltip": "Path to the FFmpeg binary - required for ALAC support and metadata preservation",
+    "ffprobePath": "FFprobe Binary",
+    "ffprobePathTooltip": "Path to the FFprobe binary - part of FFmpeg, required for audio file analysis",
+    "browse": "Browse",
+    "identify": "Identify",
+    "identifySuccess": "Found in PATH: {{path}}",
+    "identifyError": "Not found in PATH"
+  },
+  "options": {
+    "title": "Transcoding Options",
+    "useDocker": "Use Docker",
+    "useDockerTooltip": "Use Docker container for Sox/FFmpeg instead of local installation. Recommended if you don't have these tools installed.",
+    "enforceOutputFormat": "Enforce Output Format",
+    "enforceOutputFormatTooltip": "Force all audio files to be converted to this format",
+    "formats": {
+      "default": "Default (Smart)",
+      "flac": "FLAC",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC"
+    },
+    "noPreserveMetadata": "Don't Preserve Metadata",
+    "noPreserveMetadataTooltip": "Skip copying ID3 tags and cover art from original files",
+    "copyImages": "Copy Images",
+    "copyImagesTooltip": "Copy JPG and PNG image files from source to target directory"
+  },
+  "folders": {
+    "title": "Folders",
+    "sourceDir": "Source Folder",
+    "sourceDirTooltip": "Directory containing audio files to be transcoded",
+    "targetDir": "Target Folder",
+    "targetDirTooltip": "Directory where transcoded files will be saved",
+    "required": "Required"
+  },
+  "actions": {
+    "startTranscoding": "Start Transcoding",
+    "stopTranscoding": "Stop Transcoding",
+    "downloadLilt": "Download Lilt"
+  },
+  "output": {
+    "title": "Output",
+    "clear": "Clear",
+    "waiting": "Waiting to start...",
+    "running": "Transcoding in progress...",
+    "completed": "Transcoding completed!",
+    "stopped": "Transcoding stopped.",
+    "error": "Error: {{message}}"
+  },
+  "validation": {
+    "liltPathRequired": "Lilt binary path is required",
+    "soxPathRequired": "SoX binary path is required when not using Docker",
+    "ffmpegPathRequired": "FFmpeg binary path is required when not using Docker",
+    "ffprobePathRequired": "FFprobe binary path is required when not using Docker",
+    "sourceDirRequired": "Source folder is required",
+    "targetDirRequired": "Target folder is required"
+  },
+  "notifications": {
+    "settingsSaved": "Settings saved successfully",
+    "transcodingStarted": "Transcoding started",
+    "transcodingStopped": "Transcoding stopped",
+    "error": "Error: {{message}}"
+  }
+}

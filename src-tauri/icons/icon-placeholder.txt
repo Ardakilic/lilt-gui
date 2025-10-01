@@ -1,0 +1,10 @@
+# Placeholder Icons
+# Replace these files with actual icon images:
+# - 32x32.png
+# - 128x128.png
+# - 128x128@2x.png
+# - icon.icns (macOS)
+# - icon.ico (Windows)
+
+# For now, you can generate icons using online tools or the Tauri icon generator:
+# https://tauri.app/v1/guides/features/icons/

@@ -1,0 +1,42 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    # Only run after CI workflow completes successfully
+    needs: []
+    steps:
+      - uses: actions/checkout@v4
+
+      # Wait for CI to complete if it's still running
+      - name: Wait for CI
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Test and Lint'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Download all artifacts from CI
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          workflow: ci.yml
+          workflow_conclusion: success
+          branch: main
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

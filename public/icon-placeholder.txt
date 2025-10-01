@@ -1,0 +1,19 @@
+/* Placeholder PNG - This represents a simple icon */
+/* Replace this with actual PNG files for the app icons */
+/* 
+Required icon files:
+- src-tauri/icons/32x32.png
+- src-tauri/icons/128x128.png
+- src-tauri/icons/128x128@2x.png
+- src-tauri/icons/icon.icns (macOS)
+- src-tauri/icons/icon.ico (Windows)
+- public/icon.png
+
+You can generate these using:
+1. Create a 512x512 PNG source image
+2. Use online tools like https://icon.kitchen/ or
+3. Use Tauri icon generator: https://tauri.app/v1/guides/features/icons/
+4. Or use ImageMagick/GIMP to create different sizes
+
+For a simple placeholder during development, you can use a solid color square.
+*/
