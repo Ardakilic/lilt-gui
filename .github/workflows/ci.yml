@@ -25,16 +25,8 @@ jobs:
       - name: Run linter
         run: npm run lint
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: npm run test:coverage
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v4
-        if: always()
-        with:
-          files: ./coverage/coverage-final.json
-          flags: unittests
-          name: codecov-umbrella
 
   build:
     name: Build ${{ matrix.platform }}
@@ -42,9 +34,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-22.04, windows-latest, macos-latest]
+        platform: [ubuntu-24.04, windows-latest, macos-latest]
         include:
-          - platform: ubuntu-22.04
+          - platform: ubuntu-24.04
             rust-target: x86_64-unknown-linux-gnu
           - platform: windows-latest
             rust-target: x86_64-pc-windows-msvc
@@ -67,7 +59,7 @@ jobs:
           targets: ${{ matrix.rust-target }}
 
       - name: Install dependencies (Ubuntu)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
@@ -79,7 +71,7 @@ jobs:
         run: npm run tauri:build
 
       - name: Upload artifacts (Ubuntu)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-24.04'
         uses: actions/upload-artifact@v4
         with:
           name: linux-build
@@ -112,7 +104,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: ubuntu-22.04
+          - platform: ubuntu-24.04
             rust-target: aarch64-unknown-linux-gnu
             arch: aarch64
           - platform: macos-latest
@@ -135,7 +127,7 @@ jobs:
           targets: ${{ matrix.rust-target }}
 
       - name: Install dependencies (Ubuntu ARM)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu
@@ -144,7 +136,7 @@ jobs:
         run: npm ci
 
       - name: Build (Linux ARM)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-24.04'
         env:
           CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
         run: npm run tauri:build -- --target ${{ matrix.rust-target }}
@@ -154,7 +146,7 @@ jobs:
         run: npm run tauri:build -- --target ${{ matrix.rust-target }}
 
       - name: Upload artifacts (Linux ARM)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-24.04'
         uses: actions/upload-artifact@v4
         with:
           name: linux-arm64-build

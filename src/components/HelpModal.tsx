@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { open } from "@tauri-apps/plugin-shell";
+import { useTranslation } from "react-i18next";
 
 interface HelpModalProps {
   isOpen: boolean;

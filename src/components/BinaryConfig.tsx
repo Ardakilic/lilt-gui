@@ -1,7 +1,7 @@
 import { type ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { Settings } from "../types";
 import { findBinaryInPath, selectFile } from "../services/tauri";
+import type { Settings } from "../types";
 
 interface BinaryConfigProps {
   settings: Settings;
@@ -20,7 +20,9 @@ export function BinaryConfig({ settings, onSettingsChange }: BinaryConfigProps) 
         onSettingsChange({ ...settings, [field]: path });
       } else {
         // In browser dev mode, show an alert
-        alert("File dialogs only work in the Tauri app. Use 'make dev-tauri' to test this feature.");
+        alert(
+          "File dialogs only work in the Tauri app. Use 'make dev-tauri' to test this feature.",
+        );
       }
     } catch (error) {
       console.error("Failed to select file:", error);
@@ -32,7 +34,7 @@ export function BinaryConfig({ settings, onSettingsChange }: BinaryConfigProps) 
       const path = await findBinaryInPath(binaryName);
       onSettingsChange({ ...settings, [field]: path });
       setIdentifyStatus({ ...identifyStatus, [field]: t("binaries.identifySuccess", { path }) });
-    } catch (error) {
+    } catch (_error) {
       setIdentifyStatus({ ...identifyStatus, [field]: t("binaries.identifyError") });
     }
   };
@@ -86,7 +88,9 @@ export function BinaryConfig({ settings, onSettingsChange }: BinaryConfigProps) 
             </button>
           </div>
           {identifyStatus[key] && (
-            <p style={{ fontSize: "0.75rem", marginTop: "0.25rem", color: "var(--text-secondary)" }}>
+            <p
+              style={{ fontSize: "0.75rem", marginTop: "0.25rem", color: "var(--text-secondary)" }}
+            >
               {identifyStatus[key]}
             </p>
           )}

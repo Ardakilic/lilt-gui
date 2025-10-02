@@ -22,11 +22,7 @@ export function LanguageSelector() {
 
   return (
     <div className="language-selector">
-      <button
-        type="button"
-        className="language-button"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button type="button" className="language-button" onClick={() => setIsOpen(!isOpen)}>
         <span>🌐</span>
         <span>{currentLanguage?.name}</span>
       </button>

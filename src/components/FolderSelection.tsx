@@ -1,7 +1,7 @@
-import { type ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import type { Settings } from "../types";
 import { selectDirectory } from "../services/tauri";
+import type { Settings } from "../types";
 
 interface FolderSelectionProps {
   settings: Settings;
@@ -21,7 +21,9 @@ export function FolderSelection({ settings, onSettingsChange }: FolderSelectionP
         }
       } else {
         // In browser dev mode, show an alert
-        alert("File dialogs only work in the Tauri app. Use 'make dev-tauri' to test this feature.");
+        alert(
+          "File dialogs only work in the Tauri app. Use 'make dev-tauri' to test this feature.",
+        );
       }
     } catch (error) {
       console.error("Failed to select directory:", error);

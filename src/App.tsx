@@ -19,12 +19,18 @@ function App() {
 
   const handleTranscodingStart = () => {
     setIsRunning(true);
-    setOutput((prev) => [...prev, `[${new Date().toLocaleTimeString()}] ${t("notifications.transcodingStarted")}`]);
+    setOutput((prev) => [
+      ...prev,
+      `[${new Date().toLocaleTimeString()}] ${t("notifications.transcodingStarted")}`,
+    ]);
   };
 
   const handleTranscodingStop = () => {
     setIsRunning(false);
-    setOutput((prev) => [...prev, `[${new Date().toLocaleTimeString()}] ${t("notifications.transcodingStopped")}`]);
+    setOutput((prev) => [
+      ...prev,
+      `[${new Date().toLocaleTimeString()}] ${t("notifications.transcodingStopped")}`,
+    ]);
   };
 
   const handleClearOutput = () => {

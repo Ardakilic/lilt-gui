@@ -15,11 +15,18 @@ export function OutputDisplay({ output, isRunning, onClear }: OutputDisplayProps
     if (outputRef.current) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
-  }, [output]);
+  }, []);
 
   return (
     <div className="section">
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "1rem",
+        }}
+      >
         <h2 className="section-title" style={{ marginBottom: 0 }}>
           {t("output.title")}
         </h2>

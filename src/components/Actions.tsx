@@ -1,8 +1,8 @@
+import { open } from "@tauri-apps/plugin-shell";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { open } from "@tauri-apps/plugin-shell";
-import type { Settings } from "../types";
 import { startTranscoding, stopTranscoding } from "../services/tauri";
+import type { Settings } from "../types";
 
 interface ActionsProps {
   settings: Settings;
@@ -11,7 +11,12 @@ interface ActionsProps {
   onTranscodingStop: () => void;
 }
 
-export function Actions({ settings, isRunning, onTranscodingStart, onTranscodingStop }: ActionsProps) {
+export function Actions({
+  settings,
+  isRunning,
+  onTranscodingStart,
+  onTranscodingStop,
+}: ActionsProps) {
   const { t } = useTranslation();
   const [error, setError] = useState<string | null>(null);
 
@@ -78,7 +83,7 @@ export function Actions({ settings, isRunning, onTranscodingStart, onTranscoding
         // Fallback for browser dev mode
         window.open("https://github.com/Ardakilic/lilt/releases/latest", "_blank");
       }
-    } catch (err) {
+    } catch (_err) {
       // If Tauri fails, try browser fallback
       window.open("https://github.com/Ardakilic/lilt/releases/latest", "_blank");
     }
@@ -87,7 +92,15 @@ export function Actions({ settings, isRunning, onTranscodingStart, onTranscoding
   return (
     <div className="section">
       {error && (
-        <div style={{ padding: "0.75rem", marginBottom: "1rem", backgroundColor: "var(--danger-color)", color: "white", borderRadius: "0.375rem" }}>
+        <div
+          style={{
+            padding: "0.75rem",
+            marginBottom: "1rem",
+            backgroundColor: "var(--danger-color)",
+            color: "white",
+            borderRadius: "0.375rem",
+          }}
+        >
           {error}
         </div>
       )}
@@ -100,19 +113,10 @@ export function Actions({ settings, isRunning, onTranscodingStart, onTranscoding
         >
           {t("actions.startTranscoding")}
         </button>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={handleStop}
-          disabled={!isRunning}
-        >
+        <button type="button" className="btn btn-danger" onClick={handleStop} disabled={!isRunning}>
           {t("actions.stopTranscoding")}
         </button>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={handleDownload}
-        >
+        <button type="button" className="btn btn-secondary" onClick={handleDownload}>
           {t("actions.downloadLilt")}
         </button>
       </div>

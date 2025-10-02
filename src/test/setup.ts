@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
-import { beforeAll, vi } from "vitest";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { beforeAll, vi } from "vitest";
 
 // Initialize i18next for tests
 i18n.use(initReactI18next).init({
@@ -20,6 +20,24 @@ i18n.use(initReactI18next).init({
         header: {
           help: "Help",
           language: "Language",
+        },
+        help: {
+          title: "About Lilt GUI",
+          description: "Lilt GUI is a modern graphical interface",
+          whatIsLilt: "What is Lilt?",
+          liltDescription: "Lilt is a command-line tool",
+          features: "Features",
+          featuresList: [
+            "Convert FLAC, ALAC and MP3 files",
+            "Support for multiple output formats (FLAC, MP3, ALAC)",
+            "Preserve metadata and cover art",
+            "Docker support for containerized execution",
+            "Cross-platform: Windows, macOS, Linux",
+          ],
+          author: "Author",
+          authorInfo: "Created by Arda Kilicdagi",
+          visitGithub: "Visit GitHub Repository",
+          close: "Close",
         },
         binaries: {
           title: "Binary Configuration",
@@ -52,6 +70,14 @@ i18n.use(initReactI18next).init({
           clear: "Clear",
           waiting: "Waiting to start...",
         },
+        validation: {
+          liltPathRequired: "Lilt Binary path is required",
+          soxPathRequired: "SoX Binary path is required when not using Docker",
+          ffmpegPathRequired: "FFmpeg Binary path is required when not using Docker",
+          ffprobePathRequired: "FFprobe Binary path is required when not using Docker",
+          sourceDirRequired: "Source folder is required",
+          targetDirRequired: "Target folder is required",
+        },
       },
     },
   },
@@ -69,12 +95,21 @@ beforeAll(() => {
 
   // Mock @tauri-apps/plugin-shell
   vi.mock("@tauri-apps/plugin-shell", () => ({
-    open: vi.fn(),
+    open: vi.fn().mockResolvedValue(undefined),
   }));
 
   // Mock @tauri-apps/plugin-dialog
   vi.mock("@tauri-apps/plugin-dialog", () => ({
     DialogExt: vi.fn(),
+  }));
+
+  // Mock tauri service functions
+  vi.mock("../services/tauri", () => ({
+    startTranscoding: vi.fn().mockResolvedValue(undefined),
+    stopTranscoding: vi.fn().mockResolvedValue(undefined),
+    selectFile: vi.fn().mockResolvedValue("/mock/path/file"),
+    selectDirectory: vi.fn().mockResolvedValue("/mock/path/dir"),
+    findBinaryInPath: vi.fn().mockResolvedValue("/usr/bin/mock"),
   }));
 
   // Mock localStorage

@@ -15,6 +15,10 @@ export default defineConfig({
         "**/*.config.*",
         "**/mockData.ts",
         "dist/",
+        "src/main.tsx", // Entry point, can't test in JSDOM
+        "src/i18n.ts", // i18n initialization, tested implicitly
+        "src/**/index.ts", // Export-only files
+        "src/services/tauri.ts", // Tauri API wrapper, mocked in tests
       ],
       thresholds: {
         lines: 80,
