@@ -40,7 +40,7 @@ describe("tauri service", () => {
 
   describe("selectDirectory", () => {
     it("should return a string path", async () => {
-      const result = await tauriService.selectDirectory();
+      const result = await tauriService.selectDirectory("Select a directory");
       expect(typeof result).toBe("string");
     });
   });
