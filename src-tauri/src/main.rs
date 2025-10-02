@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::{Child, Command as StdCommand, Stdio};
 use std::sync::Mutex;
-use tauri::{AppHandle, Manager, State};
+use tauri::{AppHandle, Emitter, Manager, State};
 
 #[derive(Default)]
 struct ProcessState {
@@ -37,7 +37,7 @@ fn find_binary_in_path(binary_name: String) -> Result<String, String> {
 /// Select a file using the system file dialog
 #[tauri::command]
 async fn select_file(app: AppHandle, title: String) -> Result<String, String> {
-    use tauri_plugin_dialog::{DialogExt, FileDialogBuilder};
+    use tauri_plugin_dialog::DialogExt;
     
     let file_path = app
         .dialog()
@@ -46,7 +46,7 @@ async fn select_file(app: AppHandle, title: String) -> Result<String, String> {
         .blocking_pick_file();
     
     match file_path {
-        Some(path) => Ok(path.path().to_string_lossy().to_string()),
+        Some(path) => Ok(path.as_path().to_string_lossy().to_string()),
         None => Err("No file selected".to_string()),
     }
 }
@@ -63,7 +63,7 @@ async fn select_directory(app: AppHandle, title: String) -> Result<String, Strin
         .blocking_pick_folder();
     
     match dir_path {
-        Some(path) => Ok(path.path().to_string_lossy().to_string()),
+        Some(path) => Ok(path.as_path().to_string_lossy().to_string()),
         None => Err("No directory selected".to_string()),
     }
 }
