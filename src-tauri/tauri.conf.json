@@ -37,7 +37,7 @@
     ],
     "resources": [],
     "copyright": "Copyright © 2025 Arda Kilicdagi",
-    "category": "Audio",
+    "category": "Utility",
     "shortDescription": "GUI for Lilt audio transcoder",
     "longDescription": "Modern GUI for Lilt - A cross-platform audio transcoding tool that converts Hi-Res FLAC and ALAC files",
     "macOS": {
