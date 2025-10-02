@@ -137,9 +137,11 @@ jobs:
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo dpkg --add-architecture arm64
-          # Disable existing sources for ARM64 to avoid 404 errors
+          # Completely disable ARM64 for all existing Ubuntu repos to prevent 404 errors
+          # GitHub Actions has multiple source files we need to handle
           sudo sed -i 's/^deb /deb [arch=amd64] /' /etc/apt/sources.list
-          # Add ARM64-specific sources from Ubuntu Ports
+          sudo sed -i 's/^deb /deb [arch=amd64] /' /etc/apt/sources.list.d/*.list || true
+          # Add ARM64-only sources using Ubuntu Ports (the ONLY repository for ARM64 packages)
           sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
           deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble main restricted universe multiverse
           deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates main restricted universe multiverse
