@@ -112,24 +112,8 @@ describe("BinaryConfig", () => {
       expect(mockOnChange).toHaveBeenCalled();
     });
   });
-});
-import type { Settings } from "../types";
 
-const mockSettings: Settings = {
-  liltPath: "/usr/bin/lilt",
-  soxPath: "/usr/bin/sox",
-  ffmpegPath: "/usr/bin/ffmpeg",
-  ffprobePath: "/usr/bin/ffprobe",
-  useDocker: false,
-  enforceOutputFormat: "default",
-  noPreserveMetadata: false,
-  copyImages: true,
-  sourceDir: "/path/to/source",
-  targetDir: "/path/to/target",
-};
-
-describe("BinaryConfig", () => {
-  it("renders all binary input fields", () => {
+  it("renders all binary labels correctly", () => {
     render(<BinaryConfig settings={mockSettings} onSettingsChange={vi.fn()} />);
 
     expect(screen.getByText(/Lilt Binary/i)).toBeInTheDocument();
@@ -138,37 +122,18 @@ describe("BinaryConfig", () => {
     expect(screen.getByText(/FFprobe Binary/i)).toBeInTheDocument();
   });
 
-  it("displays current binary paths", () => {
+  it("displays current binary paths in inputs", () => {
     render(<BinaryConfig settings={mockSettings} onSettingsChange={vi.fn()} />);
 
     const liltInput = screen.getByDisplayValue("/usr/bin/lilt");
+    const soxInput = screen.getByDisplayValue("/usr/bin/sox");
+    const ffmpegInput = screen.getByDisplayValue("/usr/bin/ffmpeg");
+    const ffprobeInput = screen.getByDisplayValue("/usr/bin/ffprobe");
+
     expect(liltInput).toBeInTheDocument();
-  });
-
-  it("updates path when input changes", () => {
-    const onSettingsChange = vi.fn();
-    render(<BinaryConfig settings={mockSettings} onSettingsChange={onSettingsChange} />);
-
-    const liltInput = screen.getByDisplayValue("/usr/bin/lilt");
-    fireEvent.change(liltInput, { target: { value: "/new/path/lilt" } });
-
-    expect(onSettingsChange).toHaveBeenCalledWith({
-      ...mockSettings,
-      liltPath: "/new/path/lilt",
-    });
-  });
-
-  it("disables sox/ffmpeg inputs when using docker", () => {
-    const dockerSettings = { ...mockSettings, useDocker: true };
-    render(<BinaryConfig settings={dockerSettings} onSettingsChange={vi.fn()} />);
-
-    const soxInput = screen.getByPlaceholderText("/path/to/sox");
-    const ffmpegInput = screen.getByPlaceholderText("/path/to/ffmpeg");
-    const ffprobeInput = screen.getByPlaceholderText("/path/to/ffprobe");
-
-    expect(soxInput).toBeDisabled();
-    expect(ffmpegInput).toBeDisabled();
-    expect(ffprobeInput).toBeDisabled();
+    expect(soxInput).toBeInTheDocument();
+    expect(ffmpegInput).toBeInTheDocument();
+    expect(ffprobeInput).toBeInTheDocument();
   });
 
   it("enables all inputs when not using docker", () => {
@@ -185,18 +150,18 @@ describe("BinaryConfig", () => {
     expect(ffprobeInput).not.toBeDisabled();
   });
 
-  it("shows browse buttons for all binaries", () => {
+  it("shows browse buttons for all binary inputs", () => {
     render(<BinaryConfig settings={mockSettings} onSettingsChange={vi.fn()} />);
 
     const browseButtons = screen.getAllByText(/Browse/i);
-    expect(browseButtons).toHaveLength(4); // 4 binary fields
+    expect(browseButtons).toHaveLength(4);
   });
 
-  it("shows identify buttons for all binaries", () => {
+  it("shows identify buttons for all binary inputs", () => {
     render(<BinaryConfig settings={mockSettings} onSettingsChange={vi.fn()} />);
 
     const identifyButtons = screen.getAllByText(/Identify/i);
-    expect(identifyButtons).toHaveLength(4); // 4 binary fields
+    expect(identifyButtons).toHaveLength(4);
   });
 
   it("disables sox/ffmpeg browse buttons when using docker", () => {
@@ -214,24 +179,7 @@ describe("BinaryConfig", () => {
     expect(browseButtons[3]).toBeDisabled();
   });
 
-  it("shows alert when clicking browse in browser mode", () => {
-    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
-
-    render(<BinaryConfig settings={mockSettings} onSettingsChange={vi.fn()} />);
-
-    const browseButtons = screen.getAllByText(/Browse/i);
-    if (browseButtons[0]) {
-      fireEvent.click(browseButtons[0]);
-    }
-
-    expect(alertMock).toHaveBeenCalledWith(
-      "File dialogs only work in the Tauri app. Use 'make dev-tauri' to test this feature.",
-    );
-
-    alertMock.mockRestore();
-  });
-
-  it("updates multiple binary paths", () => {
+  it("updates sox path on input change", () => {
     const onSettingsChange = vi.fn();
     render(<BinaryConfig settings={mockSettings} onSettingsChange={onSettingsChange} />);
 
@@ -242,6 +190,11 @@ describe("BinaryConfig", () => {
       ...mockSettings,
       soxPath: "/new/sox",
     });
+  });
+
+  it("updates ffmpeg path on input change", () => {
+    const onSettingsChange = vi.fn();
+    render(<BinaryConfig settings={mockSettings} onSettingsChange={onSettingsChange} />);
 
     const ffmpegInput = screen.getByDisplayValue("/usr/bin/ffmpeg");
     fireEvent.change(ffmpegInput, { target: { value: "/new/ffmpeg" } });
@@ -249,6 +202,19 @@ describe("BinaryConfig", () => {
     expect(onSettingsChange).toHaveBeenCalledWith({
       ...mockSettings,
       ffmpegPath: "/new/ffmpeg",
+    });
+  });
+
+  it("updates ffprobe path on input change", () => {
+    const onSettingsChange = vi.fn();
+    render(<BinaryConfig settings={mockSettings} onSettingsChange={onSettingsChange} />);
+
+    const ffprobeInput = screen.getByDisplayValue("/usr/bin/ffprobe");
+    fireEvent.change(ffprobeInput, { target: { value: "/new/ffprobe" } });
+
+    expect(onSettingsChange).toHaveBeenCalledWith({
+      ...mockSettings,
+      ffprobePath: "/new/ffprobe",
     });
   });
 });

@@ -59,13 +59,7 @@ describe("OutputDisplay", () => {
   });
 
   it("shows running status message", () => {
-    render(
-      <OutputDisplay
-        output={["Starting..."]}
-        isRunning={true}
-        onClear={vi.fn()}
-      />,
-    );
+    render(<OutputDisplay output={["Starting..."]} isRunning={true} onClear={vi.fn()} />);
 
     expect(screen.getByText("Starting...")).toBeInTheDocument();
   });

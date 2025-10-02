@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import * as tauriService from "../services/tauri";
 
 describe("tauri service", () => {
@@ -18,7 +18,7 @@ describe("tauri service", () => {
 
       // Call the function to increase coverage
       const result = await tauriService.startTranscoding(mockConfig);
-      
+
       // In test environment, mocked version returns undefined
       expect(result).toBeUndefined();
     });
