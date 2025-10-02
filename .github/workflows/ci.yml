@@ -29,17 +29,20 @@ jobs:
         run: npm run test:coverage
 
   build:
-    name: Build ${{ matrix.platform }}
+    name: Build ${{ matrix.platform-name }}
     strategy:
       fail-fast: false
       matrix:
         platform: [ubuntu-24.04, windows-latest, macos-latest]
         include:
           - platform: ubuntu-24.04
+            platform-name: Linux x64
             rust-target: x86_64-unknown-linux-gnu
           - platform: windows-latest
+            platform-name: Windows x64
             rust-target: x86_64-pc-windows-msvc
           - platform: macos-latest
+            platform-name: macOS x64
             rust-target: x86_64-apple-darwin
 
     runs-on: ${{ matrix.platform }}
@@ -57,7 +60,7 @@ jobs:
         with:
           targets: ${{ matrix.rust-target }}
 
-      - name: Install dependencies (Ubuntu)
+      - name: Install dependencies (Linux)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
@@ -69,11 +72,11 @@ jobs:
       - name: Build
         run: npm run tauri:build
 
-      - name: Upload artifacts (Ubuntu)
+      - name: Upload artifacts (Linux x64)
         if: matrix.platform == 'ubuntu-24.04'
         uses: actions/upload-artifact@v4
         with:
-          name: linux-build
+          name: linux-x64-build
           path: |
             src-tauri/target/release/bundle/deb/*.deb
             src-tauri/target/release/bundle/appimage/*.AppImage
@@ -97,18 +100,21 @@ jobs:
             src-tauri/target/release/bundle/macos/*.app
 
   build-arm:
-    name: Build ARM ${{ matrix.platform }}
+    name: Build ${{ matrix.platform-name }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - platform: ubuntu-24.04
+            platform-name: Linux ARM64
             rust-target: aarch64-unknown-linux-gnu
             arch: aarch64
           - platform: macos-latest
+            platform-name: macOS ARM64 (Apple Silicon)
             rust-target: aarch64-apple-darwin
             arch: arm64
           - platform: windows-latest
+            platform-name: Windows ARM64
             rust-target: aarch64-pc-windows-msvc
             arch: arm64
 
@@ -127,15 +133,18 @@ jobs:
         with:
           targets: ${{ matrix.rust-target }}
 
-      - name: Install dependencies (Ubuntu ARM64)
+      - name: Install dependencies (Linux ARM64)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo dpkg --add-architecture arm64
+          # Disable existing sources for ARM64 to avoid 404 errors
+          sudo sed -i 's/^deb /deb [arch=amd64] /' /etc/apt/sources.list
+          # Add ARM64-specific sources from Ubuntu Ports
           sudo bash -c 'cat > /etc/apt/sources.list.d/arm64.list <<EOF
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble main restricted
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates main restricted
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble universe
-          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates universe
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-updates main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-backports main restricted universe multiverse
+          deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ noble-security main restricted universe multiverse
           EOF'
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu

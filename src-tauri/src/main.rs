@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use std::process::{Child, Command as StdCommand, Stdio};
 use std::sync::Mutex;
-use tauri::{AppHandle, Emitter, Manager, State};
+use tauri::{AppHandle, Emitter, State};
 
 #[derive(Default)]
 struct ProcessState {
@@ -46,7 +46,13 @@ async fn select_file(app: AppHandle, title: String) -> Result<String, String> {
         .blocking_pick_file();
     
     match file_path {
-        Some(path) => Ok(path.as_path().to_string_lossy().to_string()),
+        Some(path) => {
+            if let Some(path_str) = path.as_path() {
+                Ok(path_str.to_string_lossy().to_string())
+            } else {
+                Err("Invalid file path".to_string())
+            }
+        }
         None => Err("No file selected".to_string()),
     }
 }
@@ -63,7 +69,13 @@ async fn select_directory(app: AppHandle, title: String) -> Result<String, Strin
         .blocking_pick_folder();
     
     match dir_path {
-        Some(path) => Ok(path.as_path().to_string_lossy().to_string()),
+        Some(path) => {
+            if let Some(path_str) = path.as_path() {
+                Ok(path_str.to_string_lossy().to_string())
+            } else {
+                Err("Invalid directory path".to_string())
+            }
+        }
         None => Err("No directory selected".to_string()),
     }
 }
