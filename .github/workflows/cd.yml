@@ -16,7 +16,7 @@ jobs:
 
       # Wait for CI to complete if it's still running
       - name: Wait for CI
-        uses: lewagon/wait-on-check-action@v1.3.1
+        uses: lewagon/wait-on-check-action@v1.4.1
         with:
           ref: ${{ github.ref }}
           check-name: 'Test and Lint'
