@@ -12,7 +12,7 @@ jobs:
     # Only run after CI workflow completes successfully
     needs: []
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Wait for CI to complete if it's still running
       - name: Wait for CI
