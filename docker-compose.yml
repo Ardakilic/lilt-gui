@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # Frontend development server (Vite)
   frontend:
-    image: node:20-alpine
+    image: node:22-alpine
     container_name: lilt-gui-frontend
     working_dir: /app
     volumes:
@@ -44,7 +44,7 @@ services:
 
   # Test runner
   test:
-    image: node:20-alpine
+    image: node:22-alpine
     container_name: lilt-gui-test
     working_dir: /app
     volumes:
@@ -60,7 +60,7 @@ services:
 
   # Linter
   lint:
-    image: node:20-alpine
+    image: node:22-alpine
     container_name: lilt-gui-lint
     working_dir: /app
     volumes:
