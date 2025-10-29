@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: "22.20.0"
+          node-version: "22.21.1"
           cache: "npm"
 
       - name: Install dependencies
@@ -58,7 +58,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: "22.20.0"
+          node-version: "22.21.1"
           cache: "npm"
 
       - name: Setup Rust
@@ -89,7 +89,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: "22.20.0"
+          node-version: "22.21.1"
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
