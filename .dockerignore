@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Build
+build/
+dist/
+*.exe
+*.app
+
+# Dependencies
+node_modules/
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Wails
+.wails/
+wails_*_temp/
+
+# Logs
+*.log
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Env
+.env
+.env.local

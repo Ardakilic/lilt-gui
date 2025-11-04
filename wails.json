@@ -1,0 +1,20 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "lilt-gui",
+  "outputfilename": "lilt-gui",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Arda Kılıçdağı",
+    "email": "arda@kilicdagi.com"
+  },
+  "info": {
+    "companyName": "Arda Kılıçdağı",
+    "productName": "Lilt GUI",
+    "productVersion": "1.0.0",
+    "copyright": "Copyright © 2025 Arda Kılıçdağı",
+    "comments": "A modern GUI for lilt audio transcoder"
+  }
+}

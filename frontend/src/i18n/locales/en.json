@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Lilt GUI"
+  },
+  "header": {
+    "help": "Help",
+    "downloadLilt": "Download Lilt"
+  },
+  "help": {
+    "title": "About Lilt GUI",
+    "description": "Lilt GUI is a modern cross-platform desktop application for managing lilt audio transcoding.",
+    "whatIsLilt": "What is Lilt?",
+    "liltDescription": "Lilt is a cross-platform command-line tool that converts Hi-Res FLAC and ALAC files to 16-bit FLAC files with a sample rate of 44.1kHz or 48kHz. It can also enforce output formats for all audio files to FLAC, MP3, or ALAC.",
+    "features": "Features",
+    "feature1": "Convert Hi-Res FLAC/ALAC files to 16-bit FLAC",
+    "feature2": "Enforce output format (FLAC, MP3, ALAC)",
+    "feature3": "Preserve metadata and cover art",
+    "feature4": "Docker support for cross-platform compatibility",
+    "author": "Author",
+    "authorInfo": "Lilt and Lilt GUI are created by Arda Kılıçdağı. Visit",
+    "close": "Close"
+  },
+  "config": {
+    "title": "Configuration",
+    "liltBinary": "Lilt Binary",
+    "liltBinaryPlaceholder": "Path to lilt binary",
+    "soxBinary": "SoX Binary",
+    "soxBinaryPlaceholder": "Path to sox binary (optional)",
+    "soxNgBinary": "SoX-NG Binary",
+    "soxNgBinaryPlaceholder": "Path to sox_ng binary (optional)",
+    "ffmpegBinary": "FFmpeg Binary",
+    "ffmpegBinaryPlaceholder": "Path to ffmpeg binary (optional)",
+    "ffprobeBinary": "FFprobe Binary",
+    "ffprobeBinaryPlaceholder": "Path to ffprobe binary (optional)",
+    "useDocker": "Use Docker",
+    "outputFormat": "Output Format",
+    "noPreserveMetadata": "Do Not Preserve Metadata",
+    "copyImages": "Copy Images",
+    "sourceDirectory": "Source Directory",
+    "sourceDirectoryPlaceholder": "Select source directory",
+    "targetDirectory": "Target Directory",
+    "targetDirectoryPlaceholder": "Select target directory",
+    "browse": "Browse",
+    "identify": "Identify",
+    "startTranscoding": "Start Transcoding",
+    "transcoding": "Transcoding...",
+    "externalTools": "External Tools (Required when not using Docker)",
+    "selectLiltBinary": "Select lilt binary",
+    "selectSoxBinary": "Select SoX binary",
+    "selectSoxNgBinary": "Select SoX-NG binary",
+    "selectFfmpegBinary": "Select FFmpeg binary",
+    "selectFfprobeBinary": "Select FFprobe binary",
+    "selectSourceDirectory": "Select source directory",
+    "selectTargetDirectory": "Select target directory",
+    "notFoundInPath": "{{binary}} not found in PATH",
+    "format": {
+      "default": "Default (Smart Detection)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    },
+    "tooltip": {
+      "liltBinary": "Path to the lilt executable. Required to run transcoding.",
+      "soxBinary": "Path to SoX binary. Required when not using Docker.",
+      "soxNgBinary": "Path to SoX-NG binary (alternative to SoX). Required when not using Docker.",
+      "ffmpegBinary": "Path to FFmpeg binary. Required for ALAC support and metadata preservation when not using Docker.",
+      "ffprobeBinary": "Path to FFprobe binary. Required for audio analysis when not using Docker.",
+      "useDocker": "Use Docker to run transcoding. Recommended for better cross-platform compatibility and no need to install external tools.",
+      "outputFormat": "Choose the output format for all audio files. Default mode intelligently detects and converts only Hi-Res files.",
+      "noPreserveMetadata": "Do not preserve ID3 tags and cover art. By default, metadata is preserved.",
+      "copyImages": "Copy JPG and PNG files from source to target directory.",
+      "sourceDirectory": "Directory containing the audio files to transcode.",
+      "targetDirectory": "Directory where transcoded files will be saved."
+    },
+    "validation": {
+      "liltRequired": "Lilt binary path is required",
+      "sourceRequired": "Source directory is required",
+      "targetRequired": "Target directory is required"
+    },
+    "error": {
+      "startFailed": "Failed to start transcoding"
+    }
+  },
+  "output": {
+    "title": "Output Console",
+    "stopTranscoding": "Stop Transcoding",
+    "clear": "Clear",
+    "placeholder": "Output will appear here when transcoding starts...",
+    "stopped": "Transcoding stopped by user",
+    "stopFailed": "Failed to stop transcoding"
+  }
+}

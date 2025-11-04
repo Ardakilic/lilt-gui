@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Lilt GUI"
+  },
+  "header": {
+    "help": "Yardım",
+    "downloadLilt": "Lilt İndir"
+  },
+  "help": {
+    "title": "Lilt GUI Hakkında",
+    "description": "Lilt GUI, lilt ses dönüştürme işlemlerini yönetmek için modern bir çapraz platform masaüstü uygulamasıdır.",
+    "whatIsLilt": "Lilt Nedir?",
+    "liltDescription": "Lilt, Hi-Res FLAC ve ALAC dosyalarını 44.1kHz veya 48kHz örnekleme hızında 16-bit FLAC dosyalarına dönüştüren çapraz platform komut satırı aracıdır. Ayrıca tüm ses dosyalarını FLAC, MP3 veya ALAC formatlarına dönüştürebilir.",
+    "features": "Özellikler",
+    "feature1": "Hi-Res FLAC/ALAC dosyalarını 16-bit FLAC'a dönüştürme",
+    "feature2": "Çıktı formatı zorlama (FLAC, MP3, ALAC)",
+    "feature3": "Meta veri ve kapak resmini koruma",
+    "feature4": "Çapraz platform uyumluluğu için Docker desteği",
+    "author": "Yazar",
+    "authorInfo": "Lilt ve Lilt GUI, Arda Kılıçdağı tarafından oluşturulmuştur. Ziyaret edin",
+    "close": "Kapat"
+  },
+  "config": {
+    "title": "Yapılandırma",
+    "liltBinary": "Lilt İkili Dosyası",
+    "liltBinaryPlaceholder": "Lilt ikili dosyası yolu",
+    "soxBinary": "SoX İkili Dosyası",
+    "soxBinaryPlaceholder": "SoX ikili dosyası yolu (opsiyonel)",
+    "soxNgBinary": "SoX-NG İkili Dosyası",
+    "soxNgBinaryPlaceholder": "SoX-NG ikili dosyası yolu (opsiyonel)",
+    "ffmpegBinary": "FFmpeg İkili Dosyası",
+    "ffmpegBinaryPlaceholder": "FFmpeg ikili dosyası yolu (opsiyonel)",
+    "ffprobeBinary": "FFprobe İkili Dosyası",
+    "ffprobeBinaryPlaceholder": "FFprobe ikili dosyası yolu (opsiyonel)",
+    "useDocker": "Docker Kullan",
+    "outputFormat": "Çıktı Formatı",
+    "noPreserveMetadata": "Meta Veriyi Koruma",
+    "copyImages": "Resimleri Kopyala",
+    "sourceDirectory": "Kaynak Dizin",
+    "sourceDirectoryPlaceholder": "Kaynak dizin seçin",
+    "targetDirectory": "Hedef Dizin",
+    "targetDirectoryPlaceholder": "Hedef dizin seçin",
+    "browse": "Gözat",
+    "identify": "Tanımla",
+    "startTranscoding": "Dönüştürmeyi Başlat",
+    "transcoding": "Dönüştürülüyor...",
+    "externalTools": "Harici Araçlar (Docker kullanılmadığında gerekli)",
+    "selectLiltBinary": "Lilt ikili dosyasını seçin",
+    "selectSoxBinary": "SoX ikili dosyasını seçin",
+    "selectSoxNgBinary": "SoX-NG ikili dosyasını seçin",
+    "selectFfmpegBinary": "FFmpeg ikili dosyasını seçin",
+    "selectFfprobeBinary": "FFprobe ikili dosyasını seçin",
+    "selectSourceDirectory": "Kaynak dizin seçin",
+    "selectTargetDirectory": "Hedef dizin seçin",
+    "notFoundInPath": "{{binary}} PATH'de bulunamadı",
+    "format": {
+      "default": "Varsayılan (Akıllı Algılama)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    },
+    "tooltip": {
+      "liltBinary": "Lilt yürütülebilir dosyasının yolu. Dönüştürme için gereklidir.",
+      "soxBinary": "SoX ikili dosyasının yolu. Docker kullanılmadığında gereklidir.",
+      "soxNgBinary": "SoX-NG ikili dosyasının yolu (SoX'a alternatif). Docker kullanılmadığında gereklidir.",
+      "ffmpegBinary": "FFmpeg ikili dosyasının yolu. ALAC desteği ve meta veri koruma için gereklidir.",
+      "ffprobeBinary": "FFprobe ikili dosyasının yolu. Ses analizi için gereklidir.",
+      "useDocker": "Dönüştürme için Docker kullan. Daha iyi çapraz platform uyumluluğu ve harici araç kurulumuna gerek kalmaması için önerilir.",
+      "outputFormat": "Tüm ses dosyaları için çıktı formatını seçin. Varsayılan mod, yalnızca Hi-Res dosyaları akıllıca algılar ve dönüştürür.",
+      "noPreserveMetadata": "ID3 etiketlerini ve kapak resmini koruma. Varsayılan olarak meta veri korunur.",
+      "copyImages": "JPG ve PNG dosyalarını kaynaktan hedefe kopyala.",
+      "sourceDirectory": "Dönüştürülecek ses dosyalarını içeren dizin.",
+      "targetDirectory": "Dönüştürülmüş dosyaların kaydedileceği dizin."
+    },
+    "validation": {
+      "liltRequired": "Lilt ikili dosyası yolu gereklidir",
+      "sourceRequired": "Kaynak dizin gereklidir",
+      "targetRequired": "Hedef dizin gereklidir"
+    },
+    "error": {
+      "startFailed": "Dönüştürme başlatılamadı"
+    }
+  },
+  "output": {
+    "title": "Çıktı Konsolu",
+    "stopTranscoding": "Dönüştürmeyi Durdur",
+    "clear": "Temizle",
+    "placeholder": "Dönüştürme başladığında çıktı burada görünecek...",
+    "stopped": "Dönüştürme kullanıcı tarafından durduruldu",
+    "stopFailed": "Dönüştürme durdurulamadı"
+  }
+}

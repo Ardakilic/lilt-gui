@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Lilt GUI"
+  },
+  "header": {
+    "help": "Ayuda",
+    "downloadLilt": "Descargar Lilt"
+  },
+  "help": {
+    "title": "Acerca de Lilt GUI",
+    "description": "Lilt GUI es una aplicación de escritorio multiplataforma moderna para administrar la transcodificación de audio lilt.",
+    "whatIsLilt": "¿Qué es Lilt?",
+    "liltDescription": "Lilt es una herramienta de línea de comandos multiplataforma que convierte archivos FLAC y ALAC de alta resolución en archivos FLAC de 16 bits con una frecuencia de muestreo de 44.1kHz o 48kHz. También puede forzar formatos de salida para todos los archivos de audio a FLAC, MP3 o ALAC.",
+    "features": "Características",
+    "feature1": "Convertir archivos FLAC/ALAC de alta resolución a FLAC de 16 bits",
+    "feature2": "Forzar formato de salida (FLAC, MP3, ALAC)",
+    "feature3": "Preservar metadatos y carátula",
+    "feature4": "Soporte Docker para compatibilidad multiplataforma",
+    "author": "Autor",
+    "authorInfo": "Lilt y Lilt GUI fueron creados por Arda Kılıçdağı. Visita",
+    "close": "Cerrar"
+  },
+  "config": {
+    "title": "Configuración",
+    "liltBinary": "Binario de Lilt",
+    "liltBinaryPlaceholder": "Ruta al binario de lilt",
+    "soxBinary": "Binario de SoX",
+    "soxBinaryPlaceholder": "Ruta al binario de sox (opcional)",
+    "soxNgBinary": "Binario de SoX-NG",
+    "soxNgBinaryPlaceholder": "Ruta al binario de sox_ng (opcional)",
+    "ffmpegBinary": "Binario de FFmpeg",
+    "ffmpegBinaryPlaceholder": "Ruta al binario de ffmpeg (opcional)",
+    "ffprobeBinary": "Binario de FFprobe",
+    "ffprobeBinaryPlaceholder": "Ruta al binario de ffprobe (opcional)",
+    "useDocker": "Usar Docker",
+    "outputFormat": "Formato de Salida",
+    "noPreserveMetadata": "No Preservar Metadatos",
+    "copyImages": "Copiar Imágenes",
+    "sourceDirectory": "Directorio de Origen",
+    "sourceDirectoryPlaceholder": "Seleccionar directorio de origen",
+    "targetDirectory": "Directorio de Destino",
+    "targetDirectoryPlaceholder": "Seleccionar directorio de destino",
+    "browse": "Examinar",
+    "identify": "Identificar",
+    "startTranscoding": "Iniciar Transcodificación",
+    "transcoding": "Transcodificando...",
+    "externalTools": "Herramientas Externas (Requeridas cuando no se usa Docker)",
+    "selectLiltBinary": "Seleccionar binario de lilt",
+    "selectSoxBinary": "Seleccionar binario de SoX",
+    "selectSoxNgBinary": "Seleccionar binario de SoX-NG",
+    "selectFfmpegBinary": "Seleccionar binario de FFmpeg",
+    "selectFfprobeBinary": "Seleccionar binario de FFprobe",
+    "selectSourceDirectory": "Seleccionar directorio de origen",
+    "selectTargetDirectory": "Seleccionar directorio de destino",
+    "notFoundInPath": "{{binary}} no encontrado en PATH",
+    "format": {
+      "default": "Predeterminado (Detección Inteligente)",
+      "flac": "FLAC (16-bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-bit)"
+    },
+    "tooltip": {
+      "liltBinary": "Ruta al ejecutable de lilt. Requerido para ejecutar la transcodificación.",
+      "soxBinary": "Ruta al binario de SoX. Requerido cuando no se usa Docker.",
+      "soxNgBinary": "Ruta al binario de SoX-NG (alternativa a SoX). Requerido cuando no se usa Docker.",
+      "ffmpegBinary": "Ruta al binario de FFmpeg. Requerido para soporte ALAC y preservación de metadatos.",
+      "ffprobeBinary": "Ruta al binario de FFprobe. Requerido para análisis de audio.",
+      "useDocker": "Usar Docker para ejecutar la transcodificación. Recomendado para mejor compatibilidad multiplataforma y sin necesidad de instalar herramientas externas.",
+      "outputFormat": "Elegir el formato de salida para todos los archivos de audio. El modo predeterminado detecta y convierte inteligentemente solo archivos de alta resolución.",
+      "noPreserveMetadata": "No preservar etiquetas ID3 y carátula. Por defecto, se preservan los metadatos.",
+      "copyImages": "Copiar archivos JPG y PNG del directorio de origen al de destino.",
+      "sourceDirectory": "Directorio que contiene los archivos de audio a transcodificar.",
+      "targetDirectory": "Directorio donde se guardarán los archivos transcodificados."
+    },
+    "validation": {
+      "liltRequired": "Se requiere la ruta del binario de lilt",
+      "sourceRequired": "Se requiere el directorio de origen",
+      "targetRequired": "Se requiere el directorio de destino"
+    },
+    "error": {
+      "startFailed": "Error al iniciar la transcodificación"
+    }
+  },
+  "output": {
+    "title": "Consola de Salida",
+    "stopTranscoding": "Detener Transcodificación",
+    "clear": "Limpiar",
+    "placeholder": "La salida aparecerá aquí cuando comience la transcodificación...",
+    "stopped": "Transcodificación detenida por el usuario",
+    "stopFailed": "Error al detener la transcodificación"
+  }
+}

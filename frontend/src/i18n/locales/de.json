@@ -1,0 +1,92 @@
+{
+  "app": {
+    "title": "Lilt GUI"
+  },
+  "header": {
+    "help": "Hilfe",
+    "downloadLilt": "Lilt Herunterladen"
+  },
+  "help": {
+    "title": "Über Lilt GUI",
+    "description": "Lilt GUI ist eine moderne plattformübergreifende Desktop-Anwendung zur Verwaltung der Lilt-Audio-Transkodierung.",
+    "whatIsLilt": "Was ist Lilt?",
+    "liltDescription": "Lilt ist ein plattformübergreifendes Befehlszeilen-Tool, das Hi-Res FLAC- und ALAC-Dateien in 16-Bit-FLAC-Dateien mit einer Abtastrate von 44,1 kHz oder 48 kHz konvertiert. Es kann auch Ausgabeformate für alle Audiodateien in FLAC, MP3 oder ALAC erzwingen.",
+    "features": "Funktionen",
+    "feature1": "Konvertierung von Hi-Res FLAC/ALAC-Dateien in 16-Bit-FLAC",
+    "feature2": "Ausgabeformat erzwingen (FLAC, MP3, ALAC)",
+    "feature3": "Metadaten und Cover-Art beibehalten",
+    "feature4": "Docker-Unterstützung für plattformübergreifende Kompatibilität",
+    "author": "Autor",
+    "authorInfo": "Lilt und Lilt GUI wurden von Arda Kılıçdağı erstellt. Besuchen Sie",
+    "close": "Schließen"
+  },
+  "config": {
+    "title": "Konfiguration",
+    "liltBinary": "Lilt-Binärdatei",
+    "liltBinaryPlaceholder": "Pfad zur Lilt-Binärdatei",
+    "soxBinary": "SoX-Binärdatei",
+    "soxBinaryPlaceholder": "Pfad zur SoX-Binärdatei (optional)",
+    "soxNgBinary": "SoX-NG-Binärdatei",
+    "soxNgBinaryPlaceholder": "Pfad zur SoX-NG-Binärdatei (optional)",
+    "ffmpegBinary": "FFmpeg-Binärdatei",
+    "ffmpegBinaryPlaceholder": "Pfad zur FFmpeg-Binärdatei (optional)",
+    "ffprobeBinary": "FFprobe-Binärdatei",
+    "ffprobeBinaryPlaceholder": "Pfad zur FFprobe-Binärdatei (optional)",
+    "useDocker": "Docker Verwenden",
+    "outputFormat": "Ausgabeformat",
+    "noPreserveMetadata": "Metadaten Nicht Beibehalten",
+    "copyImages": "Bilder Kopieren",
+    "sourceDirectory": "Quellverzeichnis",
+    "sourceDirectoryPlaceholder": "Quellverzeichnis auswählen",
+    "targetDirectory": "Zielverzeichnis",
+    "targetDirectoryPlaceholder": "Zielverzeichnis auswählen",
+    "browse": "Durchsuchen",
+    "identify": "Identifizieren",
+    "startTranscoding": "Transkodierung Starten",
+    "transcoding": "Transkodierung läuft...",
+    "externalTools": "Externe Tools (Erforderlich, wenn Docker nicht verwendet wird)",
+    "selectLiltBinary": "Lilt-Binärdatei auswählen",
+    "selectSoxBinary": "SoX-Binärdatei auswählen",
+    "selectSoxNgBinary": "SoX-NG-Binärdatei auswählen",
+    "selectFfmpegBinary": "FFmpeg-Binärdatei auswählen",
+    "selectFfprobeBinary": "FFprobe-Binärdatei auswählen",
+    "selectSourceDirectory": "Quellverzeichnis auswählen",
+    "selectTargetDirectory": "Zielverzeichnis auswählen",
+    "notFoundInPath": "{{binary}} nicht in PATH gefunden",
+    "format": {
+      "default": "Standard (Intelligente Erkennung)",
+      "flac": "FLAC (16-Bit)",
+      "mp3": "MP3 (320kbps)",
+      "alac": "ALAC (16-Bit)"
+    },
+    "tooltip": {
+      "liltBinary": "Pfad zur ausführbaren Lilt-Datei. Erforderlich für die Transkodierung.",
+      "soxBinary": "Pfad zur SoX-Binärdatei. Erforderlich, wenn Docker nicht verwendet wird.",
+      "soxNgBinary": "Pfad zur SoX-NG-Binärdatei (Alternative zu SoX). Erforderlich, wenn Docker nicht verwendet wird.",
+      "ffmpegBinary": "Pfad zur FFmpeg-Binärdatei. Erforderlich für ALAC-Unterstützung und Metadatenbeibehaltung.",
+      "ffprobeBinary": "Pfad zur FFprobe-Binärdatei. Erforderlich für die Audioanalyse.",
+      "useDocker": "Docker für die Transkodierung verwenden. Empfohlen für bessere plattformübergreifende Kompatibilität und keine Notwendigkeit, externe Tools zu installieren.",
+      "outputFormat": "Wählen Sie das Ausgabeformat für alle Audiodateien. Der Standardmodus erkennt und konvertiert intelligent nur Hi-Res-Dateien.",
+      "noPreserveMetadata": "ID3-Tags und Cover-Art nicht beibehalten. Standardmäßig werden Metadaten beibehalten.",
+      "copyImages": "JPG- und PNG-Dateien vom Quell- ins Zielverzeichnis kopieren.",
+      "sourceDirectory": "Verzeichnis mit den zu transkodierenden Audiodateien.",
+      "targetDirectory": "Verzeichnis, in dem transkodierte Dateien gespeichert werden."
+    },
+    "validation": {
+      "liltRequired": "Lilt-Binärdateipfad ist erforderlich",
+      "sourceRequired": "Quellverzeichnis ist erforderlich",
+      "targetRequired": "Zielverzeichnis ist erforderlich"
+    },
+    "error": {
+      "startFailed": "Transkodierung konnte nicht gestartet werden"
+    }
+  },
+  "output": {
+    "title": "Ausgabekonsole",
+    "stopTranscoding": "Transkodierung Stoppen",
+    "clear": "Löschen",
+    "placeholder": "Die Ausgabe wird hier angezeigt, wenn die Transkodierung startet...",
+    "stopped": "Transkodierung vom Benutzer gestoppt",
+    "stopFailed": "Transkodierung konnte nicht gestoppt werden"
+  }
+}

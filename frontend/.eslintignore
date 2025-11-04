@@ -1,0 +1,14 @@
+# Build outputs
+dist/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+
+# Wails generated
+src/wailsjs/
+
+# Config files
+*.config.js
+*.config.ts
